@@ -58,7 +58,7 @@ class Dict(Iterable[Tuple[K, V]]):
             f: "Dict[K, Callable[[Tuple[K, V]], Tuple[K2, V2]]]"
     ) -> "Dict[Union[K, K2], Union[V, V2]]":
         return self.from_iterable(
-            f.inner.get(k, lambda x: x)((k, v)) for k, v in self
+            f.get(k).default(lambda x: x).unwrap()((k, v)) for k, v in self
         )
 
     @classmethod
