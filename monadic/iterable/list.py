@@ -1,0 +1,36 @@
+from typing import TypeVar, Union
+import typing
+
+from .core import Iterable
+
+
+T = TypeVar('T')
+U = TypeVar('U')
+
+
+class List(Iterable[T]):
+    inner: list[T]
+
+    def __init__(self, inner: typing.Iterable[T]):
+        self.inner = list(inner)
+
+    @classmethod
+    def from_iterable(cls, iterable: typing.Iterable):
+        return List(iterable)
+
+    @classmethod
+    def unit(cls, value: T) -> 'List[T]':
+        return cls([value])
+
+    @classmethod
+    def empty(cls) -> 'List':
+        return cls([])
+
+    def __repr__(self):
+        return f'List({self.inner})'
+
+    def concat(self: 'List[T]', other: 'List[U]') -> 'List[Union[T, U]]':
+        return List(self.inner + other.inner)
+
+    def __iter__(self):
+        return self.inner.__iter__()
