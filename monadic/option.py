@@ -10,14 +10,8 @@ U = TypeVar('U')
 
 class Option(Maybe[T], ABC):
     @classmethod
-    def unit(cls, value: T) -> 'Some[T]':
+    def unit(cls, value: T) -> 'Some[T]':  # type: ignore[override]
         return Some(value)
-
-    def bind(self, f: Callable[[T], 'Option[U]']) -> 'Option[U]':  # type: ignore[override]
-        if isinstance(self, Some):
-            return f(self.value)
-        else:
-            return Nothing()
 
 
 class Some(Option[T]):
@@ -25,6 +19,12 @@ class Some(Option[T]):
 
     def __init__(self, value: T):
         self.value = value
+
+    def bind(self, f: Callable[[T], Option[U]]) -> Option[U]:  # type: ignore[override]
+        return f(self.value)
+
+    def unwrap(self) -> T:
+        return self.value
 
     def __repr__(self):
         return f'Some({repr(self.value)})'
@@ -34,6 +34,12 @@ class Some(Option[T]):
 
 
 class Nothing(Option):
+    def bind(self, f: Callable[[T], Option[U]]) -> Option[U]:  # type: ignore[override]
+        return self
+
+    def unwrap(self):
+        raise ValueError('Cannot unwrap "Nothing"')
+
     def __repr__(self):
         return 'Nothing()'
 

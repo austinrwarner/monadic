@@ -9,7 +9,7 @@ U = TypeVar('U')
 
 
 class List(Iterable[T]):
-    inner: list[T]
+    inner: typing.List[T]
 
     def __init__(self, inner: typing.Iterable[T]):
         self.inner = list(inner)
@@ -19,7 +19,7 @@ class List(Iterable[T]):
         return List(iterable)
 
     @classmethod
-    def unit(cls, value: T) -> 'List[T]':
+    def unit(cls, value: T) -> 'List[T]':  # type: ignore[override]
         return cls([value])
 
     @classmethod
@@ -29,8 +29,11 @@ class List(Iterable[T]):
     def __repr__(self):
         return f'List({self.inner})'
 
-    def concat(self: 'List[T]', other: 'List[U]') -> 'List[Union[T, U]]':
-        return List(self.inner + other.inner)
+    def concat(self, other: 'Iterable[U]') -> 'List[Union[T, U]]':
+        if isinstance(other, List):
+            return List(self.inner + other.inner)
+        else:
+            return super().concat(other)  # type: ignore[return-value]
 
     def __iter__(self):
         return self.inner.__iter__()

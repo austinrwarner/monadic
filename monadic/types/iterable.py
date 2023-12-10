@@ -2,6 +2,7 @@ from typing import Callable, TypeVar, Union
 import typing
 from abc import ABC, abstractmethod
 import functools
+import itertools
 
 from .monad import Monad
 
@@ -13,7 +14,7 @@ U = TypeVar('U')
 class Iterable(typing.Iterable, Monad[T], ABC):
     @classmethod
     @abstractmethod
-    def unit(cls, value: T) -> 'Iterable[T]':
+    def unit(cls, value: U) -> 'Iterable[U]':
         ...
 
     @classmethod
@@ -22,21 +23,23 @@ class Iterable(typing.Iterable, Monad[T], ABC):
         return ...
 
     @classmethod
-    @abstractmethod
     def empty(cls) -> 'Iterable':
-        ...
+        return cls.from_iterable([])
 
-    def bind(self, f: Callable[[T], 'Iterable[U]']) -> 'Iterable[U]':
-        return functools.reduce(self.__class__.concat, map(f, self), self.empty())  # type: ignore
+    def bind(  # type: ignore[override]
+            self,
+            f: Callable[[T], 'Iterable[U]']
+    ) -> 'Iterable[U]':
+        return functools.reduce(
+            self.__class__.concat,  # type: ignore[arg-type]
+            map(f, self),
+            self.empty()
+        )
 
-    @abstractmethod
     def concat(self, other: 'Iterable[U]') -> 'Iterable[Union[T, U]]':
-        ...
+        return self.from_iterable(
+            itertools.chain(self, other)
+        )
 
-
-def take(n: int) -> Callable[[Iterable[T]], Iterable[U]]:
-    return lambda iterable: iterable.from_iterable(item for _, item in zip(range(n), iterable))
-
-
-def fold(f: Callable[[T, T], T]) -> Callable[[Iterable[T]], T]:
-    return functools.partial(functools.reduce, f)
+    def append(self, value: U) -> 'Iterable[Union[T, U]]':
+        return self.concat(self.unit(value))

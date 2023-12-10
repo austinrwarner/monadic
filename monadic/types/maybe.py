@@ -9,17 +9,18 @@ U = TypeVar('U')
 
 
 class Maybe(Monad[T], ABC):
-    def unwrap(self: 'Maybe[T]', default: U) -> 'Maybe[Union[T, U]]':
-        return self or self.unit(default)
+    @classmethod
+    @abstractmethod
+    def unit(cls, value: U) -> 'Maybe[U]':
+        ...
+
+    def default(self, value: U) -> 'Union[Maybe[T], Maybe[U]]':
+        return self or self.unit(value)  # type: ignore[arg-type]
+
+    @abstractmethod
+    def unwrap(self) -> T:
+        ...
 
     @abstractmethod
     def __bool__(self):
         ...
-
-
-def then(f: Callable[[T], U]) -> Callable[[Maybe[T]], Maybe[U]]:
-    return lambda x: x.map(f)
-
-
-def unwrap(value: T) -> Callable[[Maybe], Maybe[T]]:
-    return lambda m: m.unwrap(value)

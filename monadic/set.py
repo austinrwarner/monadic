@@ -9,7 +9,7 @@ U = TypeVar('U')
 
 
 class Set(Iterable[T]):
-    inner: set[T]
+    inner: typing.Set[T]
 
     def __init__(self, inner: typing.Iterable[T]):
         self.inner = set(inner)
@@ -19,7 +19,7 @@ class Set(Iterable[T]):
         return Set(iterable)
 
     @classmethod
-    def unit(cls, value: T) -> 'Set[T]':
+    def unit(cls, value: T) -> 'Set[T]':  # type: ignore[override]
         return cls({value})
 
     @classmethod
@@ -29,8 +29,11 @@ class Set(Iterable[T]):
     def __repr__(self):
         return f'Set({self.inner})'
 
-    def concat(self: 'Set[T]', other: 'Set[U]') -> 'Set[Union[T, U]]':
-        return Set(self.inner | other.inner)
+    def concat(self, other: 'Iterable[U]') -> 'Set[Union[T, U]]':
+        if isinstance(other, Set):
+            return Set(self.inner | other.inner)
+        else:
+            return super().concat(other)  # type: ignore[return-value]
 
     def __iter__(self):
         return self.inner.__iter__()

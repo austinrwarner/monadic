@@ -10,16 +10,17 @@ U = TypeVar('U')
 
 class Result(Maybe[T], ABC):
     @classmethod
-    def unit(cls, value: T) -> 'Ok[T]':
+    def unit(cls, value: T) -> 'Ok[T]':  # type: ignore[override]
         return Ok(value)
 
-    def bind(self, f: Callable[[T], 'Result[U]']) -> 'Result[U]':  # type: ignore[override]
-        if isinstance(self, Ok):
-            return f(self.value)
-        elif isinstance(self, Error):
-            return self
-        else:
-            return Error(f'{self} is not a valid Result.')
+    def map(self, f: Callable[[T], U]) -> 'Result[U]':  # type: ignore[override]
+        def _wrap_exception(t: T) -> Result[U]:
+            try:
+                return Ok(f(t))
+            except Exception as e:
+                return Error(e)
+
+        return self.bind(_wrap_exception)  # type: ignore[return-value]
 
 
 class Ok(Result[T]):
@@ -27,6 +28,12 @@ class Ok(Result[T]):
 
     def __init__(self, value: T):
         self.value = value
+
+    def bind(self, f: Callable[[T], 'Result[U]']) -> 'Result[U]':  # type: ignore[override]
+        return f(self.value)
+
+    def unwrap(self) -> T:
+        return self.value
 
     def __repr__(self):
         return f'Ok({repr(self.value)})'
@@ -36,13 +43,19 @@ class Ok(Result[T]):
 
 
 class Error(Result):
-    reason: str
+    exception: Exception
 
-    def __init__(self, reason: str):
-        self.reason = reason
+    def __init__(self, exception: Exception):
+        self.exception = exception
+
+    def bind(self, f: Callable[[T], 'Result[U]']) -> 'Result[U]':  # type: ignore[override]
+        return self
+
+    def unwrap(self):
+        raise ValueError('Cannot unwrap "Error"') from self.exception
 
     def __repr__(self):
-        return f'Error({self.reason})'
+        return f'Error({repr(self.exception)})'
 
     def __bool__(self):
         return False

@@ -1,4 +1,4 @@
-from typing import Callable, TypeVar, Generic, overload, Union, Optional
+from typing import Callable, TypeVar, Generic
 from abc import ABC, abstractmethod
 import sys
 
@@ -18,7 +18,7 @@ U = TypeVar('U')
 class Monad(ABC, Generic[T]):
     @classmethod
     @abstractmethod
-    def unit(cls, value: T) -> 'Monad[T]':
+    def unit(cls, value: U) -> 'Monad[U]':
         ...
 
     @abstractmethod
@@ -27,14 +27,10 @@ class Monad(ABC, Generic[T]):
 
     def apply(self, f: 'Monad[Callable[[T], U]]') -> 'Monad[U]':
         return f.bind(
-            lambda ff: self.bind(lambda x: self.unit(ff(x)))
+            lambda ff: self.bind(
+                lambda x: self.unit(ff(x))
+            )
         )
 
     def map(self, f: Callable[[T], U]) -> 'Monad[U]':
         return self.apply(self.unit(f))
-        
-    def __rshift__(self, other: Callable[['Monad[T]'], 'Monad[U]']) -> 'Monad[U]':
-        if not callable(other):
-            raise TypeError(f'Cannot pipe {self} into {other}')
-
-        return other(self)
