@@ -1,7 +1,7 @@
 from typing import TypeVar, Union
 import typing
 
-from .core import Iterable
+from .types.iterable import Iterable
 
 
 T = TypeVar('T')

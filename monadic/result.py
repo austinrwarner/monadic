@@ -1,7 +1,7 @@
 from typing import Callable, TypeVar
 from abc import ABC
 
-from .core import Maybe
+from .types.maybe import Maybe
 
 
 T = TypeVar('T')
@@ -13,7 +13,7 @@ class Result(Maybe[T], ABC):
     def unit(cls, value: T) -> 'Ok[T]':
         return Ok(value)
 
-    def _bind(self, f: Callable[[T], 'Result[U]']) -> 'Result[U]':  # type: ignore[override]
+    def bind(self, f: Callable[[T], 'Result[U]']) -> 'Result[U]':  # type: ignore[override]
         if isinstance(self, Ok):
             return f(self.value)
         elif isinstance(self, Error):

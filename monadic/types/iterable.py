@@ -3,7 +3,7 @@ import typing
 from abc import ABC, abstractmethod
 import functools
 
-from ..monad import Monad
+from .monad import Monad
 
 
 T = TypeVar('T')
@@ -26,16 +26,12 @@ class Iterable(typing.Iterable, Monad[T], ABC):
     def empty(cls) -> 'Iterable':
         ...
 
-    def _bind(self, f: Callable[[T], 'Iterable[U]']) -> 'Iterable[U]':
+    def bind(self, f: Callable[[T], 'Iterable[U]']) -> 'Iterable[U]':
         return functools.reduce(self.__class__.concat, map(f, self), self.empty())  # type: ignore
 
     @abstractmethod
     def concat(self, other: 'Iterable[U]') -> 'Iterable[Union[T, U]]':
         ...
-
-
-def mmap(f: Callable[[T], U]) -> Callable[[Iterable[T]], Iterable[U]]:
-    return Iterable.map(f)
 
 
 def take(n: int) -> Callable[[Iterable[T]], Iterable[U]]:
