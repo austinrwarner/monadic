@@ -4,8 +4,8 @@ import typing
 from .types.iterable import Iterable
 
 
-T = TypeVar('T')
-U = TypeVar('U')
+T = TypeVar("T")
+U = TypeVar("U")
 
 
 class List(Iterable[T]):
@@ -19,17 +19,17 @@ class List(Iterable[T]):
         return List(iterable)
 
     @classmethod
-    def unit(cls, value: T) -> 'List[T]':  # type: ignore[override]
+    def unit(cls, value: T) -> "List[T]":  # type: ignore[override]
         return cls([value])
 
     @classmethod
-    def empty(cls) -> 'List':
+    def empty(cls) -> "List":
         return cls([])
 
     def __repr__(self):
-        return f'List({self.inner})'
+        return f"List({self.inner})"
 
-    def concat(self, other: 'Iterable[U]') -> 'List[Union[T, U]]':
+    def concat(self, other: "Iterable[U]") -> "List[Union[T, U]]":
         if isinstance(other, List):
             return List(self.inner + other.inner)
         else:

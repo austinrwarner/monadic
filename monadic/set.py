@@ -4,8 +4,8 @@ import typing
 from .types.iterable import Iterable
 
 
-T = TypeVar('T')
-U = TypeVar('U')
+T = TypeVar("T")
+U = TypeVar("U")
 
 
 class Set(Iterable[T]):
@@ -19,17 +19,17 @@ class Set(Iterable[T]):
         return Set(iterable)
 
     @classmethod
-    def unit(cls, value: T) -> 'Set[T]':  # type: ignore[override]
+    def unit(cls, value: T) -> "Set[T]":  # type: ignore[override]
         return cls({value})
 
     @classmethod
-    def empty(cls) -> 'Set':
+    def empty(cls) -> "Set":
         return cls(set())
 
     def __repr__(self):
-        return f'Set({self.inner})'
+        return f"Set({self.inner})"
 
-    def concat(self, other: 'Iterable[U]') -> 'Set[Union[T, U]]':
+    def concat(self, other: "Iterable[U]") -> "Set[Union[T, U]]":
         if isinstance(other, Set):
             return Set(self.inner | other.inner)
         else:

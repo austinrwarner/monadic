@@ -8,29 +8,25 @@ else:
     from typing import ParamSpec
 
 
-P = ParamSpec('P')
-R = TypeVar('R')
+P = ParamSpec("P")
+R = TypeVar("R")
 
-T = TypeVar('T')
-U = TypeVar('U')
+T = TypeVar("T")
+U = TypeVar("U")
 
 
 class Monad(ABC, Generic[T]):
     @classmethod
     @abstractmethod
-    def unit(cls, value: U) -> 'Monad[U]':
+    def unit(cls, value: U) -> "Monad[U]":
         ...
 
     @abstractmethod
-    def bind(self, f: Callable[[T], 'Monad[U]']) -> 'Monad[U]':
+    def bind(self, f: Callable[[T], "Monad[U]"]) -> "Monad[U]":
         ...
 
-    def apply(self, f: 'Monad[Callable[[T], U]]') -> 'Monad[U]':
-        return f.bind(
-            lambda ff: self.bind(
-                lambda x: self.unit(ff(x))
-            )
-        )
+    def apply(self, f: "Monad[Callable[[T], U]]") -> "Monad[U]":
+        return f.bind(lambda ff: self.bind(lambda x: self.unit(ff(x))))
 
-    def map(self, f: Callable[[T], U]) -> 'Monad[U]':
+    def map(self, f: Callable[[T], U]) -> "Monad[U]":
         return self.apply(self.unit(f))

@@ -6,13 +6,13 @@ from .set import Set
 from .list import List
 from .option import Some, Nothing, Option
 
-K = TypeVar('K', bound=Hashable)
-V = TypeVar('V')
+K = TypeVar("K", bound=Hashable)
+V = TypeVar("V")
 
-K2 = TypeVar('K2', bound=Hashable)
-V2 = TypeVar('V2')
+K2 = TypeVar("K2", bound=Hashable)
+V2 = TypeVar("V2")
 
-U = TypeVar('U')
+U = TypeVar("U")
 
 
 class Dict(Iterable[Tuple[K, V]]):
@@ -25,35 +25,53 @@ class Dict(Iterable[Tuple[K, V]]):
     def from_iterable(
             cls,
             iterable: typing.Iterable[Tuple[K2, V2]]
-    ) -> 'Dict[K2, V2]':
+    ) -> "Dict[K2, V2]":
         return Dict(iterable)
 
     @classmethod
-    def unit(cls, value: Tuple[K2, V2]) -> 'Dict[K2, V2]':  # type: ignore[override]
+    def unit(  # type: ignore[override]
+            cls,
+            value: Tuple[K2, V2]
+    ) -> "Dict[K2, V2]":
         return cls.from_iterable((value,))
 
-    def map(self, f: Callable[[Tuple[K, V]], Tuple[K2, V2]]) -> 'Dict[K2, V2]':
+    def map(  # type: ignore[override]
+            self,
+            f: Callable[[Tuple[K, V]], Tuple[K2, V2]]
+    ) -> "Dict[K2, V2]":
         return self.from_iterable((f((k, v)) for k, v in self))
 
-    def map_keys(self, f: Callable[[K], K2]) -> 'Dict[K2, V]':
+    def map_keys(
+            self,
+            f: Callable[[K], K2]
+    ) -> "Dict[K2, V]":
         return self.map(lambda x: (f(x[0]), x[1]))
 
-    def map_values(self, f: Callable[[V], V2]) -> 'Dict[K, V2]':
+    def map_values(
+            self,
+            f: Callable[[V], V2]
+    ) -> "Dict[K, V2]":
         return self.map(lambda x: (x[0], f(x[1])))
 
-    def apply(self, f: 'Dict[K, Callable[[Tuple[K, V]], Tuple[K2, V2]]]') -> 'Dict[K2, V2]':
+    def apply(  # type: ignore[override]
+            self,
+            f: "Dict[K, Callable[[Tuple[K, V]], Tuple[K2, V2]]]"
+    ) -> "Dict[Union[K, K2], Union[V, V2]]":
         return self.from_iterable(
             f.inner.get(k, lambda x: x)((k, v)) for k, v in self
         )
 
     @classmethod
-    def empty(cls) -> 'Dict':
+    def empty(cls) -> "Dict":
         return cls.from_iterable([])
 
     def __repr__(self):
-        return f'Dict({self.inner})'
+        return f"Dict({self.inner})"
 
-    def concat(self, other: 'Iterable[Tuple[K2, V2]]') -> 'Dict[Union[K, K2], Union[V, V2]]':
+    def concat(  # type: ignore[override]
+            self,
+            other: "Iterable[Tuple[K2, V2]]"
+    ) -> "Dict[Union[K, K2], Union[V, V2]]":
         return super().concat(other)  # type: ignore[return-value]
 
     def __iter__(self):
@@ -71,5 +89,9 @@ class Dict(Iterable[Tuple[K, V]]):
         except KeyError:
             return Nothing()
 
-    def set(self, key: K2, value: V2) -> 'Dict[Union[K, K2], Union[V, V2]]':
+    def set(
+            self,
+            key: K2,
+            value: V2
+    ) -> "Dict[Union[K, K2], Union[V, V2]]":
         return self.append((key, value))  # type: ignore[return-value]

@@ -1,20 +1,20 @@
-from typing import Callable, TypeVar, Union
+from typing import TypeVar, Union
 from abc import ABC, abstractmethod
 
 from .monad import Monad
 
 
-T = TypeVar('T')
-U = TypeVar('U')
+T = TypeVar("T")
+U = TypeVar("U")
 
 
 class Maybe(Monad[T], ABC):
     @classmethod
     @abstractmethod
-    def unit(cls, value: U) -> 'Maybe[U]':
+    def unit(cls, value: U) -> "Maybe[U]":
         ...
 
-    def default(self, value: U) -> 'Union[Maybe[T], Maybe[U]]':
+    def default(self, value: U) -> "Union[Maybe[T], Maybe[U]]":
         return self or self.unit(value)  # type: ignore[arg-type]
 
     @abstractmethod
