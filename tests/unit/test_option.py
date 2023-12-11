@@ -21,7 +21,7 @@ def test_apply():
     assert Some(1).apply(Some(str)) == Some('1')
     assert Some(1).apply(Nothing()) == Nothing()
     assert Nothing().apply(Some(str)) == Nothing()
-    assert Nothing().apply(Some(str)) == Nothing()
+    assert Nothing().apply(Nothing()) == Nothing()
 
 
 def test_bind():

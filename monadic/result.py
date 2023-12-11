@@ -1,11 +1,16 @@
 from typing import Callable, TypeVar
 from abc import ABC
 
-from .types.maybe import Maybe
+from .types.maybe import Maybe, UnwrapError
 
 
 T = TypeVar("T")
 U = TypeVar("U")
+
+
+class UnspecifiedException(Exception):
+    def __repr__(self):
+        return ''
 
 
 class Result(Maybe[T], ABC):
@@ -47,11 +52,14 @@ class Ok(Result[T]):
     def __bool__(self):
         return True
 
+    def __eq__(self, other):
+        return isinstance(other, Ok) and self.value == other.value
+
 
 class Error(Result):
     exception: Exception
 
-    def __init__(self, exception: Exception):
+    def __init__(self, exception: Exception = UnspecifiedException()):
         self.exception = exception
 
     def bind(  # type: ignore[override]
@@ -61,7 +69,7 @@ class Error(Result):
         return self
 
     def unwrap(self):
-        raise ValueError('Cannot unwrap "Error"') from self.exception
+        raise UnwrapError('Cannot unwrap "Error"') from self.exception
 
     def __repr__(self):
         return f"Error({repr(self.exception)})"
