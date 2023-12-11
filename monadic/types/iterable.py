@@ -1,4 +1,4 @@
-from typing import Callable, TypeVar, Union
+from typing import Callable, TypeVar, Union, Optional
 import typing
 from abc import ABC, abstractmethod
 import functools
@@ -51,3 +51,16 @@ class Iterable(typing.Iterable, Monad[T], ABC):
 
     def append(self, value: U) -> "Iterable[Union[T, U]]":
         return self.concat(self.unit(value))
+
+    def filter(self, f: Callable[[T], bool]) -> "Iterable[T]":
+        return self.from_iterable(filter(f, self))
+
+    def fold(
+            self,
+            f: Callable[[U, T], U],
+            initial: Optional[U] = None
+    ) -> U:
+        if initial is not None:
+            return functools.reduce(f, self, initial)
+        else:
+            return functools.reduce(f, self)
