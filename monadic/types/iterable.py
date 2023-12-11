@@ -35,6 +35,17 @@ class Iterable(typing.Iterable, Monad[T], ABC):
             self.empty()
         )
 
+    def apply(  # type: ignore[override]
+            self,
+            f: "Iterable[Callable[[T], U]]"
+    ) -> "Iterable[U]":
+        return self.bind(lambda x: f.map(lambda g: g(x)))
+
+    def map(  # type: ignore[override]
+        self, f: Callable[[T], U]
+    ) -> "Iterable[U]":
+        return self.from_iterable(map(f, self))
+
     def concat(self, other: "Iterable[U]") -> "Iterable[Union[T, U]]":
         return self.from_iterable(itertools.chain(self, other))
 
