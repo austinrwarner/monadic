@@ -18,6 +18,20 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "pytest-cov",
+    "pytest-console-scripts",
+    "coverage",
+    "coverage-badge"
+]
+docs = [
+    "sphinx",
+    "sphinx-rtd-theme",
+    "sphinxcontrib-napoleon",
+]
+
 
 [project.urls]
 Homepage = "https://github.com/austinrwarner/monadic"
