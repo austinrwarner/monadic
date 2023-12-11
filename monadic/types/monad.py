@@ -1,15 +1,5 @@
 from typing import Callable, TypeVar, Generic
 from abc import ABC, abstractmethod
-import sys
-
-if sys.version_info <= (3, 10):
-    from typing_extensions import ParamSpec
-else:
-    from typing import ParamSpec
-
-
-P = ParamSpec("P")
-R = TypeVar("R")
 
 T = TypeVar("T")
 U = TypeVar("U")
