@@ -8,6 +8,9 @@ T = TypeVar("T")
 U = TypeVar("U")
 
 
+class UnwrapError(Exception): pass
+
+
 class Maybe(Monad[T], ABC):
     @classmethod
     @abstractmethod

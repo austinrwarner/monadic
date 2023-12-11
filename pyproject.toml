@@ -36,3 +36,12 @@ docs = [
 [project.urls]
 Homepage = "https://github.com/austinrwarner/monadic"
 Issues = "https://github.com/austinrwarner/monadic/issues"
+
+
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "--cov=monadic --cov-report=xml"
+testpaths = [
+    "tests"
+]
