@@ -1,4 +1,4 @@
-from . import types, option, result, list, set, lazy
+from . import types, option, result, list, set
 
 
-__all__ = ["types", "option", "result", "list", "set", "lazy"]
+__all__ = ["types", "option", "result", "list", "set"]
