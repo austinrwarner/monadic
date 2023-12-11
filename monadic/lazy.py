@@ -2,6 +2,7 @@ from typing import Callable, TypeVar, Any
 
 from .types.monad import Monad
 
+
 T = TypeVar("T")
 U = TypeVar("U")
 V = TypeVar("V")
