@@ -15,12 +15,12 @@ class Iterable(typing.Iterable, Monad[T], ABC):
     @classmethod
     @abstractmethod
     def unit(cls, value: U) -> "Iterable[U]":
-        ...
+        ...  # pragma: no cover
 
     @classmethod
     @abstractmethod
     def from_iterable(cls, iterable: typing.Iterable):
-        return ...
+        return ...  # pragma: no cover
 
     @classmethod
     def empty(cls) -> "Iterable":
@@ -64,3 +64,7 @@ class Iterable(typing.Iterable, Monad[T], ABC):
             return functools.reduce(f, self, initial)
         else:
             return functools.reduce(f, self)
+
+    @abstractmethod
+    def __eq__(self, other):
+        ...  # pragma: no cover

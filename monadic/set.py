@@ -1,4 +1,4 @@
-from typing import TypeVar, Union
+from typing import TypeVar, Union, Callable
 import typing
 
 from .types.iterable import Iterable
@@ -26,6 +26,24 @@ class Set(Iterable[T]):
     def empty(cls) -> "Set":
         return cls(set())
 
+    def bind(  # type: ignore[override]
+            self,
+            f: Callable[[T], "Iterable[U]"]
+    ) -> "Set[U]":
+        return Set.from_iterable(fx for x in self for fx in f(x))
+
+    def apply(  # type: ignore[override]
+            self,
+            f: "Iterable[Callable[[T], U]]"
+    ) -> "Set[U]":
+        return Set.from_iterable(f(x) for x, f in zip(self, f))
+
+    def map(  # type: ignore[override]
+            self,
+            f: Callable[[T], U]
+    ) -> "Set[U]":
+        return Set.from_iterable(map(f, self))
+
     def __repr__(self):
         return f"Set({self.inner})"
 
@@ -37,3 +55,6 @@ class Set(Iterable[T]):
 
     def __iter__(self):
         return self.inner.__iter__()
+
+    def __eq__(self, other):
+        return isinstance(other, Set) and self.inner == other.inner

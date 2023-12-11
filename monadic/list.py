@@ -1,4 +1,4 @@
-from typing import TypeVar, Union
+from typing import TypeVar, Union, Callable
 import typing
 
 from .types.iterable import Iterable
@@ -26,6 +26,24 @@ class List(Iterable[T]):
     def empty(cls) -> "List":
         return cls([])
 
+    def bind(  # type: ignore[override]
+            self,
+            f: Callable[[T], "List[U]"]
+    ) -> "List[U]":
+        return List.from_iterable(fx for x in self for fx in f(x))
+
+    def apply(  # type: ignore[override]
+            self,
+            f: "List[Callable[[T], U]]"
+    ) -> "List[U]":
+        return List.from_iterable(f(x) for x, f in zip(self, f))
+
+    def map(  # type: ignore[override]
+            self,
+            f: Callable[[T], U]
+    ) -> "List[U]":
+        return List.from_iterable(map(f, self))
+
     def __repr__(self):
         return f"List({self.inner})"
 
@@ -37,3 +55,6 @@ class List(Iterable[T]):
 
     def __iter__(self):
         return self.inner.__iter__()
+
+    def __eq__(self, other):
+        return isinstance(other, List) and self.inner == other.inner

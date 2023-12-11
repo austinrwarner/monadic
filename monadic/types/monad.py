@@ -25,12 +25,12 @@ class Monad(ABC, Generic[T]):
     @abstractmethod
     def unit(cls, value: U) -> "Monad[U]":
         """Wrap a value in the monad class."""
-        ...
+        ...  # pragma: no cover
 
     @abstractmethod
     def bind(self, f: Callable[[T], "Monad[U]"]) -> "Monad[U]":
         """Chain a function that maps a value to a monad."""
-        ...
+        ...  # pragma: no cover
 
     def apply(self, f: "Monad[Callable[[T], U]]") -> "Monad[U]":
         """Apply a monadic function to a monad.

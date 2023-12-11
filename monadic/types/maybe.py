@@ -16,15 +16,15 @@ class Maybe(Monad[T], ABC):
     @classmethod
     @abstractmethod
     def unit(cls, value: U) -> "Maybe[U]":
-        ...
+        ...  # pragma: no cover
 
     def default(self, value: U) -> "Union[Maybe[T], Maybe[U]]":
         return self or self.unit(value)  # type: ignore[arg-type]
 
     @abstractmethod
     def unwrap(self) -> T:
-        ...
+        ...  # pragma: no cover
 
     @abstractmethod
     def __bool__(self):
-        ...
+        ...  # pragma: no cover
