@@ -1,4 +1,4 @@
-from typing import Callable, TypeVar
+from typing import Callable, TypeVar, Tuple, Type
 from abc import ABC
 
 from .types.maybe import Maybe, UnwrapError
@@ -29,6 +29,18 @@ class Result(Maybe[T], ABC):
                 return Error(e)
 
         return self.bind(_wrap_exception)  # type: ignore[return-value]
+
+    @staticmethod
+    def attempt(
+            __f: Callable[..., T],
+            __catch: Tuple[Type[Exception], ...],
+            *args,
+            **kwargs
+    ) -> "Result[T]":
+        try:
+            return Ok(__f(*args, **kwargs))
+        except __catch as e:
+            return Error(e)
 
 
 class Ok(Result[T]):

@@ -49,3 +49,8 @@ def test_repr():
     assert repr(Ok(1)) == "Ok(1)"
     assert repr(Error()) == "Error()"
     assert repr(Error(ValueError())) == "Error(ValueError())"
+
+
+def test_attempt():
+    assert Result.attempt(int, (ValueError,), '1') == Ok(1)
+    assert isinstance(Result.attempt(int, (ValueError,), 'a'), Error)
