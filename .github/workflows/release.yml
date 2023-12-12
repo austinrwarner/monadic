@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: test-release
-      url: https://testpypi.org/p/monadic
+      url: ${{ vars.RELEASE_URL }}
     permissions:
       id-token: write
     steps:
