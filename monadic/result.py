@@ -1,4 +1,4 @@
-from typing import Callable, TypeVar, Tuple, Type
+from typing import Callable, TypeVar, Tuple, Type, Union
 from abc import ABC, abstractmethod
 
 from .interfaces.maybe import Maybe, UnwrapError
@@ -101,7 +101,7 @@ class Result(Maybe[T], ABC):
     @staticmethod
     def attempt(
             __f: Callable[..., T],
-            __catch: Tuple[Type[Exception], ...],
+            __catch: Union[Type[Exception], Tuple[Type[Exception], ...]],
             *args,
             **kwargs
     ) -> "Result[T]":
@@ -113,7 +113,7 @@ class Result(Maybe[T], ABC):
         ----------
         __f : Callable[..., T]
             The function to call
-        __catch : Tuple[Type[Exception], ...]
+        __catch : Union[Type[Exception], Tuple[Type[Exception], ...]]
             The types of exceptions to catch
         *args
             Positional arguments to pass to the function
