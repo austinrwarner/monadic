@@ -42,7 +42,7 @@ jobs:
     - name: Update coverage badge
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.python-version == '3.9'}}
       run: |
-        git checkout -b meta/coverage
+        git checkout meta/coverage
         git pull
         coverage-badge -o coverage.svg
         for file in $(ls .); do
@@ -57,4 +57,4 @@ jobs:
         git config --local user.name "github-actions[bot]"
         git add .
         git commit -m "Update coverage badge"
-        git push -u origin meta/coverage
+        git push origin meta/coverage
