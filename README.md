@@ -124,6 +124,17 @@ Some(User("John Doe", Some("john.doe@xyz.com"))).bind(get_user_email) # Some("jo
 Nothing().bind(get_user_email) # Nothing()
 ```
 
+In this example, we write a function that takes a `User`, and returns the
+`email` field of the `User`. The first two examples work as expcted, they
+are just returning the `email` field of the `User` wrapped in a `Some`. 
+However, in the third example, we call that function on a `Nothing`. In this
+case, the `bind` method will return `Nothing`. There are two reasons why we 
+might not be able to get the `email` field of a `User`. The first is that the
+`User` does not exist, and the second is that the `User` does not have an
+`email` field. The `bind` method allows us to handle both of these cases
+without having to check for `None` values.
+
+
 While every monad supports the `map` and `bind` methods, some monads support 
 additional methods. For example, the `Option` type also provides the `default`
 and `unwrap` methods. The `default` method allows you to specify a default
@@ -132,13 +143,22 @@ unwrap the value from the monad, but will raise an exception if the value does
 not exist. For example:
 
 ```python
-from monadic import Option, Nothing, Some
+from monadic import Nothing, Some
 
 Some("Hello World").default("Goodbye World") # Some("Hello World")
 Nothing().default("Goodbye World") # Some("Goodbye World")
 
 Some("Hello World").unwrap() # "Hello World"
 Nothing().unwrap() # Raises an exception
+```
+
+`default` and `unwrap` are often used in immediate succession. For example:
+
+```python
+from monadic import Nothing, Some
+
+Some("Hello World").default("Goodbye World").unwrap() # "Hello World"
+Nothing().default("Goodbye World").unwrap() # "Goodbye World"
 ```
 
 ### Other Monadic Types
@@ -180,7 +200,7 @@ Result.attempt(lambda x, y: x / y, TypeError, 1, 0) # Raises ZeroDivisionError
 ```
 
 This is the monadic equivalent of the `try`/`except` statement in Python. It even
-allows you to specify the type of exception to catch, and will raise an exception
+allows you to specify the type(s) of exception to catch, and will raise an exception
 if the wrong type of exception is raised.
 
 
