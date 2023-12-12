@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monadic API &mdash; Monadic 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=d45e8c67"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Monadic
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#monad">Monad</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#monadic.Monad"><code class="docutils literal notranslate"><span class="pre">Monad</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#monadic.Monad.apply"><code class="docutils literal notranslate"><span class="pre">Monad.apply()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#monadic.Monad.bind"><code class="docutils literal notranslate"><span class="pre">Monad.bind()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#monadic.Monad.map"><code class="docutils literal notranslate"><span class="pre">Monad.map()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#monadic.Monad.unit"><code class="docutils literal notranslate"><span class="pre">Monad.unit()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#maybe">Maybe</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#monadic.Maybe"><code class="docutils literal notranslate"><span class="pre">Maybe</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#monadic.Maybe.default"><code class="docutils literal notranslate"><span class="pre">Maybe.default()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#monadic.Maybe.unit"><code class="docutils literal notranslate"><span class="pre">Maybe.unit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#monadic.Maybe.unwrap"><code class="docutils literal notranslate"><span class="pre">Maybe.unwrap()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#option">Option</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#monadic.Option"><code class="docutils literal notranslate"><span class="pre">Option</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#some">Some</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nothing">Nothing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#result">Result</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#monadic.Result"><code class="docutils literal notranslate"><span class="pre">Result</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ok">Ok</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error">Error</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#iterables">Iterables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#monadic.Iterable"><code class="docutils literal notranslate"><span class="pre">Iterable</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#monadic.Iterable.append"><code class="docutils literal notranslate"><span class="pre">Iterable.append()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#monadic.Iterable.apply"><code class="docutils literal notranslate"><span class="pre">Iterable.apply()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#monadic.Iterable.bind"><code class="docutils literal notranslate"><span class="pre">Iterable.bind()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#monadic.Iterable.concat"><code class="docutils literal notranslate"><span class="pre">Iterable.concat()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#monadic.Iterable.empty"><code class="docutils literal notranslate"><span class="pre">Iterable.empty()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#monadic.Iterable.filter"><code class="docutils literal notranslate"><span class="pre">Iterable.filter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#monadic.Iterable.fold"><code class="docutils literal notranslate"><span class="pre">Iterable.fold()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#monadic.Iterable.from_iterable"><code class="docutils literal notranslate"><span class="pre">Iterable.from_iterable()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#monadic.Iterable.map"><code class="docutils literal notranslate"><span class="pre">Iterable.map()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#monadic.Iterable.take"><code class="docutils literal notranslate"><span class="pre">Iterable.take()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#monadic.Iterable.unit"><code class="docutils literal notranslate"><span class="pre">Iterable.unit()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#list">List</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#monadic.List"><code class="docutils literal notranslate"><span class="pre">List</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#set">Set</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#monadic.Set"><code class="docutils literal notranslate"><span class="pre">Set</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#dict">Dict</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#monadic.Dict"><code class="docutils literal notranslate"><span class="pre">Dict</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Monadic</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Monadic API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="monadic-api">
+<h1>Monadic API<a class="headerlink" href="#monadic-api" title="Link to this heading"></a></h1>
+<section id="monad">
+<h2>Monad<a class="headerlink" href="#monad" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="monadic.Monad">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">monadic.</span></span><span class="sig-name descname"><span class="pre">Monad</span></span><a class="headerlink" href="#monadic.Monad" title="Link to this definition"></a></dt>
+<dd><p>Monad interface.</p>
+<p>This is an abstract base class for monads. Monads are wrapper
+types that allow for chaining operations together.</p>
+<p>Subclasses of this class must implement two methods:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">unit</span></code> (a class method)</dt><dd><p>This method is a constructor that wraps a single value</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">bind</span></code> (an instance method)</dt><dd><p>This method takes a function that maps a value to a monad
+and returns a monad of the same type.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>The interface is somewhat abstract. See <a class="reference internal" href="#monadic.Option" title="monadic.option.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">monadic.option.Option</span></code></a>
+as an example.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Monad.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#monadic.Monad" title="monadic.interfaces.monad.Monad"><span class="pre">Monad</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">U</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Monad" title="monadic.interfaces.monad.Monad"><span class="pre">Monad</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Monad.apply" title="Link to this definition"></a></dt>
+<dd><p>Apply a monadic function to a monad.</p>
+<p>This method can be overridden to provide a more efficient
+or alternative implementation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f</strong> (<a class="reference internal" href="#monadic.Monad" title="monadic.Monad"><em>Monad</em></a><em>[</em><em>Callable</em><em>[</em><em>[</em><em>T</em><em>]</em><em>, </em><em>U</em><em>]</em><em>]</em>) – A monadic function.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of applying the monadic function to the wrapped value.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Monad" title="monadic.Monad">Monad</a>[U]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Monad.bind">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#monadic.Monad" title="monadic.interfaces.monad.Monad"><span class="pre">Monad</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Monad" title="monadic.interfaces.monad.Monad"><span class="pre">Monad</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Monad.bind" title="Link to this definition"></a></dt>
+<dd><p>Chain a function that maps a value to a monad.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f</strong> (<em>Callable</em><em>[</em><em>[</em><em>T</em><em>]</em><em>, </em><a class="reference internal" href="#monadic.Monad" title="monadic.Monad"><em>Monad</em></a><em>[</em><em>U</em><em>]</em><em>]</em>) – A function that maps a value to a monad.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of applying the function to the wrapped value.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Monad" title="monadic.Monad">Monad</a>[U]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Monad.map">
+<span class="sig-name descname"><span class="pre">map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Monad" title="monadic.interfaces.monad.Monad"><span class="pre">Monad</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Monad.map" title="Link to this definition"></a></dt>
+<dd><p>Map a function over a monad.</p>
+<p>This method can be overridden to provide a more efficient
+or alternative implementation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f</strong> (<em>Callable</em><em>[</em><em>[</em><em>T</em><em>]</em><em>, </em><em>U</em><em>]</em>) – A function.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of applying the function to the wrapped value.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Monad" title="monadic.Monad">Monad</a>[U]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Monad.unit">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">U</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Monad" title="monadic.interfaces.monad.Monad"><span class="pre">Monad</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Monad.unit" title="Link to this definition"></a></dt>
+<dd><p>Wrap a value in the monad class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>U</em>) – The value to wrap.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The wrapped value.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Monad" title="monadic.Monad">Monad</a>[U]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="maybe">
+<h2>Maybe<a class="headerlink" href="#maybe" title="Link to this heading"></a></h2>
+<p><code class="code docutils literal notranslate"><span class="pre">Maybe</span></code> monads are a class of monads that represent values that may
+or may not be present. <code class="code docutils literal notranslate"><span class="pre">Monadic</span></code> exposes two <code class="code docutils literal notranslate"><span class="pre">Maybe</span></code> monads,
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code>. <code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code> represents a value
+that may or may not be present, while <code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code> represents the
+result of an operation that may or may not have succeeded. The main
+difference between the two is that <code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code> carries no information
+about why a value may not be present, while <code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code> can carry an
+error message explaining why an operation may have failed.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="monadic.Maybe">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">monadic.</span></span><span class="sig-name descname"><span class="pre">Maybe</span></span><a class="headerlink" href="#monadic.Maybe" title="Link to this definition"></a></dt>
+<dd><p>Maybe monad interface.</p>
+<p>Base class for monads that represent a value that may or may not
+exist. Subclasses must implement the following methods:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">unit</span></code> (a class method)</dt><dd><p>This method is a constructor that wraps a single valid value</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">bind</span></code> (an instance method)</dt><dd><p>How to apply a function to a value that may or may not exist.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">unwrap</span></code> (an instance method)</dt><dd><p>Retrieve the wrapped value. If the value does not exist, raise
+an <code class="xref py py-class docutils literal notranslate"><span class="pre">UnwrapError</span></code></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">__bool__</span></code> (an instance method)</dt><dd><p>Return whether the value exists.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Maybe.default">
+<span class="sig-name descname"><span class="pre">default</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">U</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Maybe" title="monadic.interfaces.maybe.Maybe"><span class="pre">Maybe</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#monadic.Maybe" title="monadic.interfaces.maybe.Maybe"><span class="pre">Maybe</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Maybe.default" title="Link to this definition"></a></dt>
+<dd><p>Return a default value if the value does not exist.</p>
+<p>If the value exists, return the wrapped value;
+otherwise, return the wrapped default value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>U</em>) – The default value.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The wrapped value or the wrapped default value.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[<a class="reference internal" href="#monadic.Maybe" title="monadic.Maybe">Maybe</a>[T], <a class="reference internal" href="#monadic.Maybe" title="monadic.Maybe">Maybe</a>[U]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Maybe.unit">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">U</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Maybe" title="monadic.interfaces.maybe.Maybe"><span class="pre">Maybe</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Maybe.unit" title="Link to this definition"></a></dt>
+<dd><p>Wrap a value in the monad class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>U</em>) – The value to wrap.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The wrapped value.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Monad" title="monadic.Monad">Monad</a>[U]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Maybe.unwrap">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unwrap</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">T</span></span></span><a class="headerlink" href="#monadic.Maybe.unwrap" title="Link to this definition"></a></dt>
+<dd><p>Retrieve the wrapped value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>UnwrapError</strong> – If the value does not exist.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The wrapped value.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>T</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<section id="option">
+<h3>Option<a class="headerlink" href="#option" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="monadic.Option">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">monadic.</span></span><span class="sig-name descname"><span class="pre">Option</span></span><a class="headerlink" href="#monadic.Option" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#monadic.Maybe" title="monadic.interfaces.maybe.Maybe"><code class="xref py py-class docutils literal notranslate"><span class="pre">Maybe</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Monadic type representing a value that may or may not exist.</p>
+<p>This class is a subclass of <a class="reference internal" href="#monadic.Maybe" title="monadic.Maybe"><code class="xref py py-class docutils literal notranslate"><span class="pre">Maybe</span></code></a> that implements the
+<a class="reference internal" href="#monadic.Monad" title="monadic.Monad"><code class="xref py py-class docutils literal notranslate"><span class="pre">Monad</span></code></a> interface. It is a wrapper type that represents a
+value that may or may not exist. It has two subclasses:
+- <a class="reference internal" href="#monadic.Some" title="monadic.Some"><code class="xref py py-class docutils literal notranslate"><span class="pre">Some</span></code></a>
+- <a class="reference internal" href="#monadic.Nothing" title="monadic.Nothing"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nothing</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Option.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#monadic.Option" title="monadic.option.Option"><span class="pre">Option</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">U</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Option" title="monadic.option.Option"><span class="pre">Option</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Option.apply" title="Link to this definition"></a></dt>
+<dd><p>Apply a function wrapped in an <a class="reference internal" href="#monadic.Option" title="monadic.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a>.</p>
+<p>If <code class="code docutils literal notranslate"><span class="pre">self</span></code> and <code class="code docutils literal notranslate"><span class="pre">f</span></code> are both <a class="reference internal" href="#monadic.Some" title="monadic.Some"><code class="xref py py-class docutils literal notranslate"><span class="pre">Some</span></code></a> instances,
+apply the function to the wrapped value and wrap in a <a class="reference internal" href="#monadic.Some" title="monadic.Some"><code class="xref py py-class docutils literal notranslate"><span class="pre">Some</span></code></a>.
+Otherwise, return <a class="reference internal" href="#monadic.Nothing" title="monadic.Nothing"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nothing</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f</strong> (<a class="reference internal" href="#monadic.Option" title="monadic.Option"><em>Option</em></a><em>[</em><em>Callable</em><em>[</em><em>[</em><em>T</em><em>]</em><em>, </em><em>U</em><em>]</em><em>]</em>) – A function wrapped in an <a class="reference internal" href="#monadic.Option" title="monadic.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of applying the function to the wrapped value.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Option" title="monadic.Option">Option</a>[U]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Option.bind">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#monadic.Option" title="monadic.option.Option"><span class="pre">Option</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Option" title="monadic.option.Option"><span class="pre">Option</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Option.bind" title="Link to this definition"></a></dt>
+<dd><p>Chain a function that maps a value to an <a class="reference internal" href="#monadic.Option" title="monadic.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a>.</p>
+<p>If <code class="code docutils literal notranslate"><span class="pre">self</span></code> is a <a class="reference internal" href="#monadic.Some" title="monadic.Some"><code class="xref py py-class docutils literal notranslate"><span class="pre">Some</span></code></a>, apply the function to the
+wrapped value. Otherwise (<code class="code docutils literal notranslate"><span class="pre">self</span></code> is a <a class="reference internal" href="#monadic.Nothing" title="monadic.Nothing"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nothing</span></code></a>),
+return <code class="code docutils literal notranslate"><span class="pre">self</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f</strong> (<em>Callable</em><em>[</em><em>[</em><em>T</em><em>]</em><em>, </em><a class="reference internal" href="#monadic.Option" title="monadic.Option"><em>Option</em></a><em>[</em><em>U</em><em>]</em><em>]</em>) – A function that maps a value to an <a class="reference internal" href="#monadic.Option" title="monadic.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of applying the function to the wrapped value.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Option" title="monadic.Option">Option</a>[U]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Option.map">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Option" title="monadic.option.Option"><span class="pre">Option</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Option.map" title="Link to this definition"></a></dt>
+<dd><p>Map a function over the wrapped value.</p>
+<p>If <code class="code docutils literal notranslate"><span class="pre">self</span></code> is a <a class="reference internal" href="#monadic.Some" title="monadic.Some"><code class="xref py py-class docutils literal notranslate"><span class="pre">Some</span></code></a>, apply the function to the
+wrapped value and wrap in a <a class="reference internal" href="#monadic.Some" title="monadic.Some"><code class="xref py py-class docutils literal notranslate"><span class="pre">Some</span></code></a>. Otherwise
+(<code class="code docutils literal notranslate"><span class="pre">self</span></code> is a <a class="reference internal" href="#monadic.Nothing" title="monadic.Nothing"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nothing</span></code></a>), return <a class="reference internal" href="#monadic.Nothing" title="monadic.Nothing"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nothing</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f</strong> (<em>Callable</em><em>[</em><em>[</em><em>T</em><em>]</em><em>, </em><em>U</em><em>]</em>) – A function that maps a value to another value.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of applying the function to the wrapped value.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Option" title="monadic.Option">Option</a>[U]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Option.unit">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Some" title="monadic.option.Some"><span class="pre">Some</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Option.unit" title="Link to this definition"></a></dt>
+<dd><p>Wrap a value in a <a class="reference internal" href="#monadic.Some" title="monadic.Some"><code class="xref py py-class docutils literal notranslate"><span class="pre">Some</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>T</em>) – The value to wrap.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The wrapped value.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Some" title="monadic.Some">Some</a>[T]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<section id="some">
+<h4>Some<a class="headerlink" href="#some" title="Link to this heading"></a></h4>
+<dl class="py class">
+<dt class="sig sig-object py" id="monadic.Some">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">monadic.</span></span><span class="sig-name descname"><span class="pre">Some</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#monadic.Some" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#monadic.Option" title="monadic.option.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>]</p>
+<p>Option type representing a value that exists.</p>
+<p>This class is a subclass of <a class="reference internal" href="#monadic.Option" title="monadic.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> that represents a value
+that exists. It has a <code class="code docutils literal notranslate"><span class="pre">value</span></code> attribute that contains the
+wrapped value. <code class="code docutils literal notranslate"><span class="pre">Some</span></code> instances are truthy.</p>
+</dd></dl>
+
+</section>
+<section id="nothing">
+<h4>Nothing<a class="headerlink" href="#nothing" title="Link to this heading"></a></h4>
+<dl class="py class">
+<dt class="sig sig-object py" id="monadic.Nothing">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">monadic.</span></span><span class="sig-name descname"><span class="pre">Nothing</span></span><a class="headerlink" href="#monadic.Nothing" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#monadic.Option" title="monadic.option.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a></p>
+<p>Option type representing a value that does not exist.</p>
+<p>This class is a subclass of <a class="reference internal" href="#monadic.Option" title="monadic.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> that represents a value
+that does not exist. <code class="code docutils literal notranslate"><span class="pre">Nothing</span></code> instances are falsy.</p>
+</dd></dl>
+
+</section>
+</section>
+<section id="result">
+<h3>Result<a class="headerlink" href="#result" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="monadic.Result">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">monadic.</span></span><span class="sig-name descname"><span class="pre">Result</span></span><a class="headerlink" href="#monadic.Result" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#monadic.Maybe" title="monadic.interfaces.maybe.Maybe"><code class="xref py py-class docutils literal notranslate"><span class="pre">Maybe</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Monadic type representing the result of a computation that may fail.</p>
+<p>This class is a subclass of <a class="reference internal" href="#monadic.Maybe" title="monadic.Maybe"><code class="xref py py-class docutils literal notranslate"><span class="pre">Maybe</span></code></a> that implements the
+<a class="reference internal" href="#monadic.Monad" title="monadic.Monad"><code class="xref py py-class docutils literal notranslate"><span class="pre">Monad</span></code></a> interface. It is a wrapper type that represents the
+result of a computation that may fail. It has two subclasses:
+- <a class="reference internal" href="#monadic.Ok" title="monadic.Ok"><code class="xref py py-class docutils literal notranslate"><span class="pre">Ok</span></code></a>
+- <a class="reference internal" href="#monadic.Error" title="monadic.Error"><code class="xref py py-class docutils literal notranslate"><span class="pre">Error</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Result.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#monadic.Result" title="monadic.result.Result"><span class="pre">Result</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">U</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Result" title="monadic.result.Result"><span class="pre">Result</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Result.apply" title="Link to this definition"></a></dt>
+<dd><p>Apply a function wrapped in an <a class="reference internal" href="#monadic.Result" title="monadic.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a>.</p>
+<p>If <code class="code docutils literal notranslate"><span class="pre">self</span></code> and <code class="code docutils literal notranslate"><span class="pre">f</span></code> are both <a class="reference internal" href="#monadic.Ok" title="monadic.Ok"><code class="xref py py-class docutils literal notranslate"><span class="pre">Ok</span></code></a> instances,
+apply the function to the wrapped value and wrap in an <a class="reference internal" href="#monadic.Ok" title="monadic.Ok"><code class="xref py py-class docutils literal notranslate"><span class="pre">Ok</span></code></a>.
+Otherwise, return <code class="code docutils literal notranslate"><span class="pre">self</span></code>.</p>
+<p>If an exception is raised while applying the function, return
+an <a class="reference internal" href="#monadic.Error" title="monadic.Error"><code class="xref py py-class docutils literal notranslate"><span class="pre">Error</span></code></a> wrapping the exception.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f</strong> (<a class="reference internal" href="#monadic.Result" title="monadic.Result"><em>Result</em></a><em>[</em><em>Callable</em><em>[</em><em>[</em><em>T</em><em>]</em><em>, </em><em>U</em><em>]</em><em>]</em>) – The function to apply to the wrapped value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Result.attempt">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">attempt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_Result__f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_Result__catch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><span class="pre">Exception</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><span class="pre">Exception</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Result" title="monadic.result.Result"><span class="pre">Result</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Result.attempt" title="Link to this definition"></a></dt>
+<dd><p>Attempt to call a function that may raise an exception.</p>
+<p>If the function raises an exception, return an <a class="reference internal" href="#monadic.Error" title="monadic.Error"><code class="xref py py-class docutils literal notranslate"><span class="pre">Error</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>__f</strong> (<em>Callable</em><em>[</em><em>...</em><em>, </em><em>T</em><em>]</em>) – The function to call</p></li>
+<li><p><strong>__catch</strong> (<em>Union</em><em>[</em><em>Type</em><em>[</em><em>Exception</em><em>]</em><em>, </em><em>Tuple</em><em>[</em><em>Type</em><em>[</em><em>Exception</em><em>]</em><em>, </em><em>...</em><em>]</em><em>]</em>) – The types of exceptions to catch</p></li>
+<li><p><strong>*args</strong> – Positional arguments to pass to the function</p></li>
+<li><p><strong>**kwargs</strong> – Keyword arguments to pass to the function</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Result.bind">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#monadic.Result" title="monadic.result.Result"><span class="pre">Result</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Result" title="monadic.result.Result"><span class="pre">Result</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Result.bind" title="Link to this definition"></a></dt>
+<dd><p>Chain a function that maps a value to a <a class="reference internal" href="#monadic.Result" title="monadic.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a>.</p>
+<p>If <code class="code docutils literal notranslate"><span class="pre">self</span></code> is an <a class="reference internal" href="#monadic.Ok" title="monadic.Ok"><code class="xref py py-class docutils literal notranslate"><span class="pre">Ok</span></code></a>, apply the function to the
+wrapped value. Otherwise (<code class="code docutils literal notranslate"><span class="pre">self</span></code> is an <a class="reference internal" href="#monadic.Error" title="monadic.Error"><code class="xref py py-class docutils literal notranslate"><span class="pre">Error</span></code></a>),
+return <code class="code docutils literal notranslate"><span class="pre">self</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f</strong> (<em>Callable</em><em>[</em><em>[</em><em>T</em><em>]</em><em>, </em><a class="reference internal" href="#monadic.Result" title="monadic.Result"><em>Result</em></a><em>[</em><em>U</em><em>]</em><em>]</em>) – The function to apply to the wrapped value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Result.map">
+<span class="sig-name descname"><span class="pre">map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Result" title="monadic.result.Result"><span class="pre">Result</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Result.map" title="Link to this definition"></a></dt>
+<dd><p>Map a function over the wrapped value.</p>
+<p>If <code class="code docutils literal notranslate"><span class="pre">self</span></code> is an <a class="reference internal" href="#monadic.Ok" title="monadic.Ok"><code class="xref py py-class docutils literal notranslate"><span class="pre">Ok</span></code></a>, apply the function to the
+wrapped value and wrap in an <a class="reference internal" href="#monadic.Ok" title="monadic.Ok"><code class="xref py py-class docutils literal notranslate"><span class="pre">Ok</span></code></a>. Otherwise
+(<code class="code docutils literal notranslate"><span class="pre">self</span></code> is an <a class="reference internal" href="#monadic.Error" title="monadic.Error"><code class="xref py py-class docutils literal notranslate"><span class="pre">Error</span></code></a>), return <code class="code docutils literal notranslate"><span class="pre">self</span></code>.</p>
+<p>If an exception is raised while applying the function, return
+an <a class="reference internal" href="#monadic.Error" title="monadic.Error"><code class="xref py py-class docutils literal notranslate"><span class="pre">Error</span></code></a> wrapping the exception.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f</strong> (<em>Callable</em><em>[</em><em>[</em><em>T</em><em>]</em><em>, </em><em>U</em><em>]</em>) – The function to apply to the wrapped value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Result.unit">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Ok" title="monadic.result.Ok"><span class="pre">Ok</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Result.unit" title="Link to this definition"></a></dt>
+<dd><p>Wrap a value in an <a class="reference internal" href="#monadic.Ok" title="monadic.Ok"><code class="xref py py-class docutils literal notranslate"><span class="pre">Ok</span></code></a> instance.</p>
+</dd></dl>
+
+</dd></dl>
+
+<section id="ok">
+<h4>Ok<a class="headerlink" href="#ok" title="Link to this heading"></a></h4>
+<dl class="py class">
+<dt class="sig sig-object py" id="monadic.Ok">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">monadic.</span></span><span class="sig-name descname"><span class="pre">Ok</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#monadic.Ok" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#monadic.Result" title="monadic.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>]</p>
+<p>Result type representing a successful computation.</p>
+<p>This class is a subclass of <a class="reference internal" href="#monadic.Result" title="monadic.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> that represents a
+successful computation. It has a <code class="code docutils literal notranslate"><span class="pre">value</span></code> attribute that
+contains the wrapped value. <code class="code docutils literal notranslate"><span class="pre">Ok</span></code> instances are truthy.</p>
+</dd></dl>
+
+</section>
+<section id="error">
+<h4>Error<a class="headerlink" href="#error" title="Link to this heading"></a></h4>
+<dl class="py class">
+<dt class="sig sig-object py" id="monadic.Error">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">monadic.</span></span><span class="sig-name descname"><span class="pre">Error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exception:</span> <span class="pre">Exception</span> <span class="pre">=</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#monadic.Error" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#monadic.Result" title="monadic.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a></p>
+<p>Result type representing a failed computation.</p>
+<p>This class is a subclass of <a class="reference internal" href="#monadic.Result" title="monadic.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> that represents a
+failed computation. It has an <code class="code docutils literal notranslate"><span class="pre">exception</span></code> attribute that
+contains the exception that was raised. <code class="code docutils literal notranslate"><span class="pre">Error</span></code> instances
+are falsy.</p>
+</dd></dl>
+
+</section>
+</section>
+</section>
+<section id="iterables">
+<h2>Iterables<a class="headerlink" href="#iterables" title="Link to this heading"></a></h2>
+<p><code class="code docutils literal notranslate"><span class="pre">Iterable</span></code> monads are a class of monads that represent a collection
+of values that can be iterated over. <code class="code docutils literal notranslate"><span class="pre">Monadic</span></code> exposes three
+<code class="code docutils literal notranslate"><span class="pre">Iterable</span></code> monads, <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code>, and <code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>.
+These monads each map to their respective Python types, but follow a functional
+style and are immutable.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="monadic.Iterable">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">monadic.</span></span><span class="sig-name descname"><span class="pre">Iterable</span></span><a class="headerlink" href="#monadic.Iterable" title="Link to this definition"></a></dt>
+<dd><p>Iterable monad interface.</p>
+<p>Base class for monads that represent a collection of values that
+may be iterated over. Subclasses must implement the following methods:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">unit</span></code> (a class method)</dt><dd><p>This method is a constructor that wraps a single valid value</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">bind</span></code> (an instance method)</dt><dd><p>How to apply a function to a value that may or may not exist.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">from_iterable</span></code> (a class method)</dt><dd><p>Wrap an iterable in the monad class.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">empty</span></code> (a class method)</dt><dd><p>Create an empty monad.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="code docutils literal notranslate"><span class="pre">__eq__</span></code> (an instance method)</dt><dd><p>Compare two monads for equality.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><code class="code docutils literal notranslate"><span class="pre">monadic.Iterable</span></code> instances are also Python iterables, so
+they can be used in for loops and comprehensions.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Iterable.append">
+<span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">U</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Iterable" title="monadic.interfaces.iterable.Iterable"><span class="pre">Iterable</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Iterable.append" title="Link to this definition"></a></dt>
+<dd><p>Add a value to this iterable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>U</em>) – The value to add.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new iterable containing the old contents and the value.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Iterable" title="monadic.Iterable">Iterable</a>[Union[T, U]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Iterable.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#monadic.Iterable" title="monadic.interfaces.iterable.Iterable"><span class="pre">Iterable</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">U</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Iterable" title="monadic.interfaces.iterable.Iterable"><span class="pre">Iterable</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Iterable.apply" title="Link to this definition"></a></dt>
+<dd><p>Apply an iterable of functions to an iterable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f</strong> (<a class="reference internal" href="#monadic.Iterable" title="monadic.Iterable"><em>Iterable</em></a><em>[</em><em>Callable</em><em>[</em><em>[</em><em>T</em><em>]</em><em>, </em><em>U</em><em>]</em><em>]</em>) – An iterable of functions.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of applying each function to each value in the
+iterable and concatenating the results.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Iterable" title="monadic.Iterable">Iterable</a>[U]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Iterable.bind">
+<span class="sig-name descname"><span class="pre">bind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#monadic.Iterable" title="monadic.interfaces.iterable.Iterable"><span class="pre">Iterable</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Iterable" title="monadic.interfaces.iterable.Iterable"><span class="pre">Iterable</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Iterable.bind" title="Link to this definition"></a></dt>
+<dd><p>Chain a function that maps a value to an Iterable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f</strong> (<em>Callable</em><em>[</em><em>[</em><em>T</em><em>]</em><em>, </em><a class="reference internal" href="#monadic.Iterable" title="monadic.Iterable"><em>Iterable</em></a><em>[</em><em>U</em><em>]</em><em>]</em>) – A function that maps a value to an Iterable.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of applying the function to each value in the
+Iterable and concatenating the results.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Iterable" title="monadic.Iterable">Iterable</a>[U]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Iterable.concat">
+<span class="sig-name descname"><span class="pre">concat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Iterable" title="monadic.interfaces.iterable.Iterable"><span class="pre">Iterable</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Iterable.concat" title="Link to this definition"></a></dt>
+<dd><p>Add the contents of another iterable to this iterable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> (<em>Iterable</em><em>[</em><em>U</em><em>]</em>) – The iterable to add.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new iterable containing the contents of both iterables.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Iterable" title="monadic.Iterable">Iterable</a>[Union[T, U]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Iterable.empty">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">empty</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Iterable" title="monadic.interfaces.iterable.Iterable"><span class="pre">Iterable</span></a></span></span><a class="headerlink" href="#monadic.Iterable.empty" title="Link to this definition"></a></dt>
+<dd><p>Create an empty monad.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Iterable.filter">
+<span class="sig-name descname"><span class="pre">filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Iterable" title="monadic.interfaces.iterable.Iterable"><span class="pre">Iterable</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Iterable.filter" title="Link to this definition"></a></dt>
+<dd><p>Filter the values in this iterable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f</strong> (<em>Callable</em><em>[</em><em>[</em><em>T</em><em>]</em><em>, </em><em>bool</em><em>]</em>) – A function that returns True for values to keep.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new iterable containing only the values that pass the filter.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Iterable" title="monadic.Iterable">Iterable</a>[T]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Iterable.fold">
+<span class="sig-name descname"><span class="pre">fold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">U</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">U</span></span></span><a class="headerlink" href="#monadic.Iterable.fold" title="Link to this definition"></a></dt>
+<dd><p>Fold the values in this iterable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<em>Callable</em><em>[</em><em>[</em><em>U</em><em>, </em><em>T</em><em>]</em><em>, </em><em>U</em><em>]</em>) – A function that takes the current value and the next value
+and returns the new value.</p></li>
+<li><p><strong>initial</strong> (<em>Optional</em><em>[</em><em>U</em><em>]</em>) – The initial value to use. If not provided, the first value
+in the iterable is used.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of folding the iterable.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>U</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Iterable.from_iterable">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_iterable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Iterable" title="monadic.interfaces.iterable.Iterable"><span class="pre">Iterable</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Iterable.from_iterable" title="Link to this definition"></a></dt>
+<dd><p>Wrap an iterable in a monad.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>iterable</strong> (<em>Iterable</em>) – The iterable to wrap.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new monad containing the contents of the iterable.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Iterable" title="monadic.Iterable">Iterable</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Iterable.map">
+<span class="sig-name descname"><span class="pre">map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Iterable" title="monadic.interfaces.iterable.Iterable"><span class="pre">Iterable</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Iterable.map" title="Link to this definition"></a></dt>
+<dd><p>Map a function over an iterable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f</strong> (<em>Callable</em><em>[</em><em>[</em><em>T</em><em>]</em><em>, </em><em>U</em><em>]</em>) – A function to map over the iterable.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new iterable containing the result of applying the function
+to each value in the iterable.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Iterable" title="monadic.Iterable">Iterable</a>[U]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Iterable.take">
+<span class="sig-name descname"><span class="pre">take</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Iterable" title="monadic.interfaces.iterable.Iterable"><span class="pre">Iterable</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Iterable.take" title="Link to this definition"></a></dt>
+<dd><p>Take the first n values from this iterable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – The number of values to take.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new iterable containing the first n values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Iterable" title="monadic.Iterable">Iterable</a>[T]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Iterable.unit">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">U</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Iterable" title="monadic.interfaces.iterable.Iterable"><span class="pre">Iterable</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Iterable.unit" title="Link to this definition"></a></dt>
+<dd><p>Wrap a value in the monad class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>U</em>) – The value to wrap.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The wrapped value.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Iterable" title="monadic.Iterable">Iterable</a>[U]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<section id="list">
+<h3>List<a class="headerlink" href="#list" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="monadic.List">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">monadic.</span></span><span class="sig-name descname"><span class="pre">List</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inner</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#monadic.List" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#monadic.Iterable" title="monadic.interfaces.iterable.Iterable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>]</p>
+<p>A monadic list.</p>
+<p>This is a wrapper around the built-in list type that implements the
+<a class="reference internal" href="#monadic.Iterable" title="monadic.Iterable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> interface. Following a functional style, it is
+immutable. To add items to the end of the list, use the <code class="xref py py-meth docutils literal notranslate"><span class="pre">append()</span></code>
+or <code class="xref py py-meth docutils literal notranslate"><span class="pre">concat()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>inner</strong> (<em>Iterable</em><em>[</em><em>T</em><em>]</em>) – The iterable to wrap as a list.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">monadic.list</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">List</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">List([2, 3, 4])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">List</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">List</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="go">List([1, 2, 2, 3, 3, 4])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">List</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">List</span><span class="p">([</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]))</span>
+<span class="go">List([&#39;1&#39;, 2.0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">List</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="go">List([1, 2, 3, 4, 5, 6])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">List</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">List([1, 2, 3, 4])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">List</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+<span class="go">[1, 2, 3]</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.List.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#monadic.Iterable" title="monadic.interfaces.iterable.Iterable"><span class="pre">Iterable</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">U</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.List" title="monadic.list.List"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.List.apply" title="Link to this definition"></a></dt>
+<dd><p>Apply each function in a list to each element of a list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f</strong> (<a class="reference internal" href="#monadic.List" title="monadic.List"><em>List</em></a><em>[</em><em>Callable</em><em>[</em><em>[</em><em>T</em><em>]</em><em>, </em><em>U</em><em>]</em><em>]</em>) – A list of functions.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new list containing the results of applying each function to
+each element of the original list.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.List" title="monadic.List">List</a>[U]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.List.bind">
+<span class="sig-name descname"><span class="pre">bind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#monadic.Iterable" title="monadic.interfaces.iterable.Iterable"><span class="pre">Iterable</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.List" title="monadic.list.List"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.List.bind" title="Link to this definition"></a></dt>
+<dd><p>Chain a function that maps a value to a <a class="reference internal" href="#monadic.List" title="monadic.List"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f</strong> (<em>Callable</em><em>[</em><em>[</em><em>T</em><em>]</em><em>, </em><a class="reference internal" href="#monadic.List" title="monadic.List"><em>List</em></a><em>[</em><em>U</em><em>]</em><em>]</em>) – A function that maps a value to a <a class="reference internal" href="#monadic.List" title="monadic.List"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of applying the function to each element of the list,
+and concatenating the results.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.List" title="monadic.List">List</a>[U]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.List.map">
+<span class="sig-name descname"><span class="pre">map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.List" title="monadic.list.List"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.List.map" title="Link to this definition"></a></dt>
+<dd><p>Map a function over a list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f</strong> (<em>Callable</em><em>[</em><em>[</em><em>T</em><em>]</em><em>, </em><em>U</em><em>]</em>) – A function that maps a value to a new value.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new list containing the results of applying the function to
+each element of the original list.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.List" title="monadic.List">List</a>[U]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.List.zip_apply">
+<span class="sig-name descname"><span class="pre">zip_apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">U</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.List" title="monadic.list.List"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.List.zip_apply" title="Link to this definition"></a></dt>
+<dd><p>Apply each function in an iterable to the corresponding element.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f</strong> (<a class="reference internal" href="#monadic.Iterable" title="monadic.Iterable"><em>Iterable</em></a><em>[</em><em>Callable</em><em>[</em><em>[</em><em>T</em><em>]</em><em>, </em><em>U</em><em>]</em><em>]</em>) – An iterable of functions.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new list containing the results of applying each function to
+the corresponding element of the original list.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.List" title="monadic.List">List</a>[U]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="set">
+<h3>Set<a class="headerlink" href="#set" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="monadic.Set">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">monadic.</span></span><span class="sig-name descname"><span class="pre">Set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inner</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#monadic.Set" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#monadic.Iterable" title="monadic.interfaces.iterable.Iterable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>]</p>
+<p>A monadic set.</p>
+<p>This is a wrapper around the built-in set type that implements the
+<a class="reference internal" href="#monadic.Iterable" title="monadic.Iterable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> interface. Following a functional style, it is
+immutable. To add items to the set, use <code class="xref py py-meth docutils literal notranslate"><span class="pre">append()</span></code> or <code class="xref py py-meth docutils literal notranslate"><span class="pre">concat()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>inner</strong> (<em>Iterable</em><em>[</em><em>T</em><em>]</em>) – The iterable to wrap as a set.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">monadic.set</span> <span class="kn">import</span> <span class="n">Set</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Set</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">})</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">Set({2, 3, 4})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Set</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">})</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">Set</span><span class="p">({</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">}))</span>
+<span class="go">Set({1, 2, 3, 4})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Set</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">})</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">Set</span><span class="p">({</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">}))</span>
+<span class="go">Set({1.0, 2.0, 3.0, &#39;2&#39;, &#39;1&#39;, &#39;3&#39;})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Set</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">})</span><span class="o">.</span><span class="n">concat</span><span class="p">({</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">})</span>
+<span class="go">Set({1, 2, 3, 4, 5})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Set</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">})</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">Set({1, 2, 3, 4})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">Set</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}))</span>
+<span class="go">[1, 2, 3]</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Set.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#monadic.Iterable" title="monadic.interfaces.iterable.Iterable"><span class="pre">Iterable</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">U</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Set" title="monadic.set.Set"><span class="pre">Set</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Set.apply" title="Link to this definition"></a></dt>
+<dd><p>Apply an iterable of functions to a set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f</strong> (<a class="reference internal" href="#monadic.Iterable" title="monadic.Iterable"><em>Iterable</em></a><em>[</em><em>Callable</em><em>[</em><em>[</em><em>T</em><em>]</em><em>, </em><em>U</em><em>]</em><em>]</em>) – An iterable of functions.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of applying each function to each value in the
+set and concatenating the results.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Set" title="monadic.Set">Set</a>[U]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Set.bind">
+<span class="sig-name descname"><span class="pre">bind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#monadic.Iterable" title="monadic.interfaces.iterable.Iterable"><span class="pre">Iterable</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Set" title="monadic.set.Set"><span class="pre">Set</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Set.bind" title="Link to this definition"></a></dt>
+<dd><p>Chain a function that maps a value to an iterable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f</strong> (<em>Callable</em><em>[</em><em>[</em><em>T</em><em>]</em><em>, </em><a class="reference internal" href="#monadic.Iterable" title="monadic.Iterable"><em>Iterable</em></a><em>[</em><em>U</em><em>]</em><em>]</em>) – A function that maps a value to an iterable.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of applying the function to each value in the
+set and concatenating the results.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Set" title="monadic.Set">Set</a>[U]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Set.map">
+<span class="sig-name descname"><span class="pre">map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Set" title="monadic.set.Set"><span class="pre">Set</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Set.map" title="Link to this definition"></a></dt>
+<dd><p>Map a function over a set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f</strong> (<em>Callable</em><em>[</em><em>[</em><em>T</em><em>]</em><em>, </em><em>U</em><em>]</em>) – A function that maps a value to a new value.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new set containing the results of applying the function to
+each value in the original set.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Set" title="monadic.Set">Set</a>[U]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="dict">
+<h3>Dict<a class="headerlink" href="#dict" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="monadic.Dict">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">monadic.</span></span><span class="sig-name descname"><span class="pre">Dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inner</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">K</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">V</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">K</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">V</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#monadic.Dict" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#monadic.Iterable" title="monadic.interfaces.iterable.Iterable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">K</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">V</span></code>]]</p>
+<p>A monadic dictionary.</p>
+<p>This is a wrapper around the built-in dict type that implements the
+<a class="reference internal" href="#monadic.Iterable" title="monadic.Iterable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> interface. Following a functional style, it is
+immutable. To add an item to the dictionary by key, use <a class="reference internal" href="#monadic.Dict.set" title="monadic.Dict.set"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set()</span></code></a>.</p>
+<p>This class is considered an iterable of tuples, where the first item
+in the tuple is the key and the second item is the value. This differs
+from the built-in dict type, which is an iterable of keys. To get the
+keys of a <a class="reference internal" href="#monadic.Dict" title="monadic.Dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>, use the <code class="xref py py-meth docutils literal notranslate"><span class="pre">keys()</span></code> method. To get the values
+of a <a class="reference internal" href="#monadic.Dict" title="monadic.Dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>, use the <code class="xref py py-meth docutils literal notranslate"><span class="pre">values()</span></code> method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>inner</strong> (<em>Iterable</em><em>[</em><em>Tuple</em><em>[</em><em>K</em><em>, </em><em>V</em><em>]</em><em>]</em>) – The iterable of tuples containing the key-value pairs to wrap as a
+dictionary. Alternatively, a dictionary can be passed in directly.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">monadic.dict</span> <span class="kn">import</span> <span class="n">Dict</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Dict</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
+<span class="go">Some(1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Dict</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;d&quot;</span><span class="p">)</span>
+<span class="go">Nothing()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Dict</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">})</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">Dict({&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;c&#39;: 3, &#39;d&#39;: 4})</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Dict.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#monadic.Dict" title="monadic.dict.Dict"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><span class="pre">K</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">K</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">V</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">K2</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">V2</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Dict" title="monadic.dict.Dict"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><span class="pre">K</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">K2</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">V</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">V2</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Dict.apply" title="Link to this definition"></a></dt>
+<dd><p>Apply a dictionary of functions to a dictionary.</p>
+<p>For each key-value pair in the dictionary, if the key is present in
+the dictionary of functions, the function is applied to the key-value
+pair and the result is added to the result dictionary. If the key is
+not present in the dictionary of functions, the key-value pair is
+ignored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f</strong> (<a class="reference internal" href="#monadic.Dict" title="monadic.Dict"><em>Dict</em></a><em>[</em><em>K</em><em>, </em><em>Callable</em><em>[</em><em>[</em><em>Tuple</em><em>[</em><em>K</em><em>, </em><em>V</em><em>]</em><em>]</em><em>, </em><em>Tuple</em><em>[</em><em>K2</em><em>, </em><em>V2</em><em>]</em><em>]</em><em>]</em>) – A dictionary of functions.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of applying the corresponding function to each
+key-value pair in the dictionary and concatenating the
+results.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Dict" title="monadic.Dict">Dict</a>[Union[K, K2], Union[V, V2]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Dict.apply_keys">
+<span class="sig-name descname"><span class="pre">apply_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#monadic.Dict" title="monadic.dict.Dict"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><span class="pre">K</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">K</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">K2</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Dict" title="monadic.dict.Dict"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><span class="pre">K</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">K2</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">V</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Dict.apply_keys" title="Link to this definition"></a></dt>
+<dd><p>Apply a dictionary of functions to the keys of a dictionary.</p>
+<p>This method is similar to <a class="reference internal" href="#monadic.Dict.apply" title="monadic.Dict.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a>, but only applies the
+functions to the keys of the dictionary, leaving the values
+unchanged.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Dict.apply_values">
+<span class="sig-name descname"><span class="pre">apply_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#monadic.Dict" title="monadic.dict.Dict"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><span class="pre">K</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">V</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">V2</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Dict" title="monadic.dict.Dict"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><span class="pre">K</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">V</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">V2</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Dict.apply_values" title="Link to this definition"></a></dt>
+<dd><p>Apply a dictionary of functions to the values of a dictionary.</p>
+<p>This method is similar to <a class="reference internal" href="#monadic.Dict.apply" title="monadic.Dict.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a>, but only applies the
+functions to the values of the dictionary, leaving the keys
+unchanged.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Dict.bind">
+<span class="sig-name descname"><span class="pre">bind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">K</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">V</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#monadic.Dict" title="monadic.dict.Dict"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><span class="pre">K2</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">V2</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Dict" title="monadic.dict.Dict"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><span class="pre">K2</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">V2</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Dict.bind" title="Link to this definition"></a></dt>
+<dd><p>Chain a function that maps a value to a dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f</strong> (<em>Callable</em><em>[</em><em>[</em><em>Tuple</em><em>[</em><em>K</em><em>, </em><em>V</em><em>]</em><em>]</em><em>, </em><a class="reference internal" href="#monadic.Dict" title="monadic.Dict"><em>Dict</em></a><em>[</em><em>K2</em><em>, </em><em>V2</em><em>]</em><em>]</em>) – A function that maps a value to a dictionary.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of applying the function to each key-value pair in the
+dictionary and concatenating the results.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Dict" title="monadic.Dict">Dict</a>[K2, V2]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Dict.drop">
+<span class="sig-name descname"><span class="pre">drop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">K</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Dict" title="monadic.dict.Dict"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><span class="pre">K</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">V</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Dict.drop" title="Link to this definition"></a></dt>
+<dd><p>Remove a key-value pair from a dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> (<em>K</em>) – The key to remove.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new dictionary containing the old contents without the key-value
+pair.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Dict" title="monadic.Dict">Dict</a>[K, V]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Dict.filter">
+<span class="sig-name descname"><span class="pre">filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">K</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">V</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Dict" title="monadic.dict.Dict"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><span class="pre">K</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">V</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Dict.filter" title="Link to this definition"></a></dt>
+<dd><p>Filter a dictionary by a predicate.</p>
+<p>The predicate is a function that takes a key-value pair and returns
+a boolean. If the predicate returns True, the key-value pair is
+included in the result. If the predicate returns False, the key-value
+pair is excluded from the result.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f</strong> (<em>Callable</em><em>[</em><em>[</em><em>Tuple</em><em>[</em><em>K</em><em>, </em><em>V</em><em>]</em><em>]</em><em>, </em><em>bool</em><em>]</em>) – A predicate function.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new dictionary containing only the key-value pairs for which
+the predicate returns True.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Dict" title="monadic.Dict">Dict</a>[K, V]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Dict.filter_keys">
+<span class="sig-name descname"><span class="pre">filter_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">K</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Dict" title="monadic.dict.Dict"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><span class="pre">K</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">V</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Dict.filter_keys" title="Link to this definition"></a></dt>
+<dd><p>Filter a dictionary by a predicate on the keys.</p>
+<p>This method is similar to <a class="reference internal" href="#monadic.Dict.filter" title="monadic.Dict.filter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">filter()</span></code></a>, but only applies the
+predicate to the keys of the dictionary, ignoring the values.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Dict.filter_values">
+<span class="sig-name descname"><span class="pre">filter_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">V</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Dict" title="monadic.dict.Dict"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><span class="pre">K</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">V</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Dict.filter_values" title="Link to this definition"></a></dt>
+<dd><p>Filter a dictionary by a predicate on the values.</p>
+<p>This method is similar to <a class="reference internal" href="#monadic.Dict.filter" title="monadic.Dict.filter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">filter()</span></code></a>, but only applies the
+predicate to the values of the dictionary, ignoring the keys.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Dict.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">K</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Option" title="monadic.option.Option"><span class="pre">Option</span></a><span class="p"><span class="pre">[</span></span><span class="pre">V</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Dict.get" title="Link to this definition"></a></dt>
+<dd><p>Get a value from a dictionary by key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> (<em>K</em>) – The key to look up in the dictionary.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A <a class="reference internal" href="#monadic.Some" title="monadic.Some"><code class="xref py py-class docutils literal notranslate"><span class="pre">Some</span></code></a> containing the value if the key is present in
+the dictionary, or <a class="reference internal" href="#monadic.Nothing" title="monadic.Nothing"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nothing</span></code></a> if the key is not present.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Option" title="monadic.Option">Option</a>[V]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Dict.map">
+<span class="sig-name descname"><span class="pre">map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">K</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">V</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">K2</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">V2</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Dict" title="monadic.dict.Dict"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><span class="pre">K2</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">V2</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Dict.map" title="Link to this definition"></a></dt>
+<dd><p>Map a function over a dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f</strong> (<em>Callable</em><em>[</em><em>[</em><em>Tuple</em><em>[</em><em>K</em><em>, </em><em>V</em><em>]</em><em>]</em><em>, </em><em>Tuple</em><em>[</em><em>K2</em><em>, </em><em>V2</em><em>]</em><em>]</em>) – A function that maps a key-value pair to a new key-value pair.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new dictionary containing the results of applying the function
+to each key-value pair in the original dictionary.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Dict" title="monadic.Dict">Dict</a>[K2, V2]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Dict.map_keys">
+<span class="sig-name descname"><span class="pre">map_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">K</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">K2</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Dict" title="monadic.dict.Dict"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><span class="pre">K2</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">V</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Dict.map_keys" title="Link to this definition"></a></dt>
+<dd><p>Map a function over the keys of a dictionary.</p>
+<p>This method is similar to <a class="reference internal" href="#monadic.Dict.map" title="monadic.Dict.map"><code class="xref py py-meth docutils literal notranslate"><span class="pre">map()</span></code></a>, but only applies the
+function to the keys of the dictionary, leaving the values
+unchanged.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Dict.map_values">
+<span class="sig-name descname"><span class="pre">map_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">V</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">V2</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Dict" title="monadic.dict.Dict"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><span class="pre">K</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">V2</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Dict.map_values" title="Link to this definition"></a></dt>
+<dd><p>Map a function over the values of a dictionary.</p>
+<p>This method is similar to <a class="reference internal" href="#monadic.Dict.map" title="monadic.Dict.map"><code class="xref py py-meth docutils literal notranslate"><span class="pre">map()</span></code></a>, but only applies the
+function to the values of the dictionary, leaving the keys
+unchanged.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="monadic.Dict.set">
+<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">K2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">V2</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#monadic.Dict" title="monadic.dict.Dict"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><span class="pre">K</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">K2</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">V</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">V2</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#monadic.Dict.set" title="Link to this definition"></a></dt>
+<dd><p>Add a key-value pair to a dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<em>K2</em>) – The key to add.</p></li>
+<li><p><strong>value</strong> (<em>V2</em>) – The value to add.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new dictionary containing the old contents and the new key-value
+pair.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#monadic.Dict" title="monadic.Dict">Dict</a>[Union[K, K2], Union[V, V2]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="introduction.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Austin Warner.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

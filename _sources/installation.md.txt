@@ -1,0 +1,14 @@
+# Installation
+
+
+`Monadic` is available on PyPI. To install, run:
+
+```bash
+pip install monadic
+```
+
+Alternatively, to install the latest development version, run:
+
+```bash
+pip install git+https://github.com/austinrwarner/monadic.git
+```

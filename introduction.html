@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; Monadic 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=d45e8c67"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Monadic API" href="api.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Monadic
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-a-monad">What is a Monad?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#other-monadic-types">Other Monadic Types</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#result">Result</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#list">List</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Monadic</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/introduction.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">Monadic</span></code> is a Python library that provides a set of Monadic types and
+functions for functional programming in Python. The library is inspired
+by the functional programming primitives available in
+<a class="reference external" href="https://www.rust-lang.org/">Rust</a>, as well as pure functional programming
+languages such as <a class="reference external" href="https://www.haskell.org/">Haskell</a>,
+<a class="reference external" href="https://fsharp.org/">F#</a>, and <a class="reference external" href="https://elm-lang.org/">Elm</a>.</p>
+<p>The library exposes a generic <code class="docutils literal notranslate"><span class="pre">Monad</span></code> type that can be used to create
+custom Monadic types. The library also provides a set of Monadic types
+that are commonly used in functional programming, including:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Maybe</span></code> types that represent values that may or may not exist.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Option</span></code>: Represents a value that may or may not exist.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Some</span></code>: Represents a value that exists.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Nothing</span></code>: Represents a value that does not exist.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Result</span></code>: Represents the result of a computation that may fail.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ok</span></code>: Represents a successful computation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Error</span></code>: Represents a failed computation.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Iterable</span></code> types that represent collections of values.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">List</span></code>: Represents a list of values.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Set</span></code>: Represents a set of values.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Dict</span></code>: Represents a dictionary of key-value pairs.</p></li>
+</ul>
+</li>
+</ul>
+<section id="what-is-a-monad">
+<h2>What is a Monad?<a class="headerlink" href="#what-is-a-monad" title="Link to this heading"></a></h2>
+<p>Though “Monad” has a somewhat technical definition based in category theory,
+in practice you can think of a Monad as a type that represents a computation
+that can be chained together with other computations.</p>
+<p>For example, a common practice in Python is to represent an optional value as
+<code class="docutils literal notranslate"><span class="pre">None</span></code>. However, this can lead to code that is difficult to read and maintain
+due to the need to check for <code class="docutils literal notranslate"><span class="pre">None</span></code> values. For example, consider the following
+code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+
+<span class="k">def</span> <span class="nf">get_user_name</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">User</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">user</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span>
+
+<span class="n">get_user_name</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span> <span class="c1"># None</span>
+<span class="n">get_user_name</span><span class="p">(</span><span class="n">User</span><span class="p">(</span><span class="s2">&quot;John Doe&quot;</span><span class="p">))</span> <span class="c1"># &quot;John Doe&quot;</span>
+</pre></div>
+</div>
+<p>This code is difficult to read and maintain because it requires the reader to
+check for <code class="docutils literal notranslate"><span class="pre">None</span></code> values. This can be improved by using the <code class="docutils literal notranslate"><span class="pre">Option</span></code> type from
+<code class="docutils literal notranslate"><span class="pre">Monadic</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">monadic</span> <span class="kn">import</span> <span class="n">Option</span><span class="p">,</span> <span class="n">Nothing</span><span class="p">,</span> <span class="n">Some</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+
+
+<span class="k">def</span> <span class="nf">get_user_name</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="n">Option</span><span class="p">[</span><span class="n">User</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Option</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="n">user</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">u</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+<span class="n">get_user_name</span><span class="p">(</span><span class="n">Nothing</span><span class="p">())</span> <span class="c1"># Nothing()</span>
+<span class="n">get_user_name</span><span class="p">(</span><span class="n">Some</span><span class="p">(</span><span class="n">User</span><span class="p">(</span><span class="s2">&quot;John Doe&quot;</span><span class="p">)))</span> <span class="c1"># Some(&quot;John Doe&quot;)</span>
+</pre></div>
+</div>
+<p>This code is easier to read and maintain because expresses the “happy path” of
+the computation, and the <code class="docutils literal notranslate"><span class="pre">Option</span></code> type handles the “unhappy path” of the
+computation. This is possible because the <code class="docutils literal notranslate"><span class="pre">Option</span></code> type is a Monad, and
+therefore supports the <code class="docutils literal notranslate"><span class="pre">map</span></code> method. The <code class="docutils literal notranslate"><span class="pre">map</span></code> method allows you to chain
+computations together in the context of the specific monad. In the case of the
+<code class="docutils literal notranslate"><span class="pre">Option</span></code> type, the <code class="docutils literal notranslate"><span class="pre">map</span></code> method will only execute the computation if the value
+exists. If the value does not exist, the <code class="docutils literal notranslate"><span class="pre">map</span></code> method will return <code class="docutils literal notranslate"><span class="pre">Nothing()</span></code>.</p>
+<p>In addition to the <code class="docutils literal notranslate"><span class="pre">map</span></code> method, the <code class="docutils literal notranslate"><span class="pre">Option</span></code> type also supports the <code class="docutils literal notranslate"><span class="pre">bind</span></code>
+method. The <code class="docutils literal notranslate"><span class="pre">bind</span></code> method is similar to the <code class="docutils literal notranslate"><span class="pre">map</span></code> method, but it allows you to
+chain computations together that return a monadic type. For example, consider
+the following code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">monadic</span> <span class="kn">import</span> <span class="n">Option</span><span class="p">,</span> <span class="n">Nothing</span><span class="p">,</span> <span class="n">Some</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">email</span><span class="p">:</span> <span class="n">Option</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Nothing</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">get_user_email</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="n">User</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Option</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span>
+
+<span class="n">Some</span><span class="p">(</span><span class="n">User</span><span class="p">(</span><span class="s2">&quot;John Doe&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">get_user_email</span><span class="p">)</span> <span class="c1"># Nothing()</span>
+<span class="n">Some</span><span class="p">(</span><span class="n">User</span><span class="p">(</span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span> <span class="n">Some</span><span class="p">(</span><span class="s2">&quot;john.doe@xyz.com&quot;</span><span class="p">)))</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">get_user_email</span><span class="p">)</span> <span class="c1"># Some(&quot;john.doe@xyz.com&quot;)</span>
+<span class="n">Nothing</span><span class="p">()</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">get_user_email</span><span class="p">)</span> <span class="c1"># Nothing()</span>
+</pre></div>
+</div>
+<p>In this example, we write a function that takes a <code class="docutils literal notranslate"><span class="pre">User</span></code>, and returns the
+<code class="docutils literal notranslate"><span class="pre">email</span></code> field of the <code class="docutils literal notranslate"><span class="pre">User</span></code>. The first two examples work as expcted, they
+are just returning the <code class="docutils literal notranslate"><span class="pre">email</span></code> field of the <code class="docutils literal notranslate"><span class="pre">User</span></code> wrapped in a <code class="docutils literal notranslate"><span class="pre">Some</span></code>.
+However, in the third example, we call that function on a <code class="docutils literal notranslate"><span class="pre">Nothing</span></code>. In this
+case, the <code class="docutils literal notranslate"><span class="pre">bind</span></code> method will return <code class="docutils literal notranslate"><span class="pre">Nothing</span></code>. There are two reasons why we
+might not be able to get the <code class="docutils literal notranslate"><span class="pre">email</span></code> field of a <code class="docutils literal notranslate"><span class="pre">User</span></code>. The first is that the
+<code class="docutils literal notranslate"><span class="pre">User</span></code> does not exist, and the second is that the <code class="docutils literal notranslate"><span class="pre">User</span></code> does not have an
+<code class="docutils literal notranslate"><span class="pre">email</span></code> field. The <code class="docutils literal notranslate"><span class="pre">bind</span></code> method allows us to handle both of these cases
+without having to check for <code class="docutils literal notranslate"><span class="pre">None</span></code> values.</p>
+<p>While every monad supports the <code class="docutils literal notranslate"><span class="pre">map</span></code> and <code class="docutils literal notranslate"><span class="pre">bind</span></code> methods, some monads support
+additional methods. For example, the <code class="docutils literal notranslate"><span class="pre">Option</span></code> type also provides the <code class="docutils literal notranslate"><span class="pre">default</span></code>
+and <code class="docutils literal notranslate"><span class="pre">unwrap</span></code> methods. The <code class="docutils literal notranslate"><span class="pre">default</span></code> method allows you to specify a default
+value to use if the value does not exist. The <code class="docutils literal notranslate"><span class="pre">unwrap</span></code> method allows you to
+unwrap the value from the monad, but will raise an exception if the value does
+not exist. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">monadic</span> <span class="kn">import</span> <span class="n">Nothing</span><span class="p">,</span> <span class="n">Some</span>
+
+<span class="n">Some</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">default</span><span class="p">(</span><span class="s2">&quot;Goodbye World&quot;</span><span class="p">)</span> <span class="c1"># Some(&quot;Hello World&quot;)</span>
+<span class="n">Nothing</span><span class="p">()</span><span class="o">.</span><span class="n">default</span><span class="p">(</span><span class="s2">&quot;Goodbye World&quot;</span><span class="p">)</span> <span class="c1"># Some(&quot;Goodbye World&quot;)</span>
+
+<span class="n">Some</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap</span><span class="p">()</span> <span class="c1"># &quot;Hello World&quot;</span>
+<span class="n">Nothing</span><span class="p">()</span><span class="o">.</span><span class="n">unwrap</span><span class="p">()</span> <span class="c1"># Raises an exception</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">default</span></code> and <code class="docutils literal notranslate"><span class="pre">unwrap</span></code> are often used in immediate succession. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">monadic</span> <span class="kn">import</span> <span class="n">Nothing</span><span class="p">,</span> <span class="n">Some</span>
+
+<span class="n">Some</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">default</span><span class="p">(</span><span class="s2">&quot;Goodbye World&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap</span><span class="p">()</span> <span class="c1"># &quot;Hello World&quot;</span>
+<span class="n">Nothing</span><span class="p">()</span><span class="o">.</span><span class="n">default</span><span class="p">(</span><span class="s2">&quot;Goodbye World&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap</span><span class="p">()</span> <span class="c1"># &quot;Goodbye World&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="other-monadic-types">
+<h2>Other Monadic Types<a class="headerlink" href="#other-monadic-types" title="Link to this heading"></a></h2>
+<section id="result">
+<h3>Result<a class="headerlink" href="#result" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Result</span></code> type is similar to the <code class="docutils literal notranslate"><span class="pre">Option</span></code> type, but it is used to represent
+the result of a computation that may fail. The <code class="docutils literal notranslate"><span class="pre">Result</span></code> type has two possible
+values: <code class="docutils literal notranslate"><span class="pre">Ok</span></code> and <code class="docutils literal notranslate"><span class="pre">Error</span></code>. The <code class="docutils literal notranslate"><span class="pre">Ok</span></code> value represents a successful computation,
+and the <code class="docutils literal notranslate"><span class="pre">Error</span></code> value represents a failed computation. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">monadic</span> <span class="kn">import</span> <span class="n">Result</span><span class="p">,</span> <span class="n">Ok</span><span class="p">,</span> <span class="n">Error</span>
+
+<span class="n">Ok</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">)</span> <span class="c1"># Ok(&quot;Hello World&quot;)</span>
+<span class="n">Error</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">())</span> <span class="c1"># Error(TypeError())</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Result</span></code> type supports all the same methods as the <code class="docutils literal notranslate"><span class="pre">Option</span></code> type, but the
+semantics are slightly different. If any of the chained computations raise an
+exception, the <code class="docutils literal notranslate"><span class="pre">Result</span></code> type will return an <code class="docutils literal notranslate"><span class="pre">Error</span></code> value. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">monadic</span> <span class="kn">import</span> <span class="n">Ok</span>
+
+<span class="n">Ok</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># Ok(0.5)</span>
+<span class="n">Ok</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">/</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># Error(ZeroDivisionError())</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Result</span></code> type also has a static method, <code class="docutils literal notranslate"><span class="pre">attempt</span></code>, that allows you to
+execute a computation that may raise an exception. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">monadic</span> <span class="kn">import</span> <span class="n">Result</span>
+
+<span class="n">Result</span><span class="o">.</span><span class="n">attempt</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="p">,</span> <span class="ne">ZeroDivisionError</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># Ok(0.5)</span>
+<span class="n">Result</span><span class="o">.</span><span class="n">attempt</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="p">,</span> <span class="ne">ZeroDivisionError</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># Error(ZeroDivisionError())</span>
+<span class="n">Result</span><span class="o">.</span><span class="n">attempt</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># Raises ZeroDivisionError</span>
+</pre></div>
+</div>
+<p>This is the monadic equivalent of the <code class="docutils literal notranslate"><span class="pre">try</span></code>/<code class="docutils literal notranslate"><span class="pre">except</span></code> statement in Python. It even
+allows you to specify the type(s) of exception to catch, and will raise an exception
+if the wrong type of exception is raised.</p>
+</section>
+<section id="list">
+<h3>List<a class="headerlink" href="#list" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">List</span></code> type is used to represent a list of values. The <code class="docutils literal notranslate"><span class="pre">map</span></code> method on the
+<code class="docutils literal notranslate"><span class="pre">List</span></code> type will apply the given function to each value in the list. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">monadic</span> <span class="kn">import</span> <span class="n">List</span>
+
+<span class="n">List</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># List([2, 4, 6])</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">List</span></code> is immutable, so rather than mutating the list in place, the <code class="docutils literal notranslate"><span class="pre">append</span></code>
+and <code class="docutils literal notranslate"><span class="pre">concat</span></code> methods will return a new list with the given value appended to
+the end of the list. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">monadic</span> <span class="kn">import</span> <span class="n">List</span>
+
+<span class="n">List</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># List([1, 2, 3, 4])</span>
+<span class="n">List</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span> <span class="c1"># List([1, 2, 3, 4, 5, 6])</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">List</span></code> type also supports the <code class="docutils literal notranslate"><span class="pre">filter</span></code> method, which will filter the list
+based on the given predicate. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">monadic</span> <span class="kn">import</span> <span class="n">List</span>
+
+<span class="n">List</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># List([2])</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">List</span></code> type also supports the <code class="docutils literal notranslate"><span class="pre">fold</span></code> method, which will fold the list into
+a single value using the given function. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">monadic</span> <span class="kn">import</span> <span class="n">List</span>
+
+<span class="n">List</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">fold</span><span class="p">(</span><span class="k">lambda</span> <span class="n">acc</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">acc</span> <span class="o">+</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># 6</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">List</span></code> type is a type of <code class="docutils literal notranslate"><span class="pre">Iterable</span></code>. Other <code class="docutils literal notranslate"><span class="pre">Iterable</span></code> types provided by
+<code class="docutils literal notranslate"><span class="pre">Monadic</span></code> include <code class="docutils literal notranslate"><span class="pre">Set</span></code> and <code class="docutils literal notranslate"><span class="pre">Dict</span></code>, which have similar methods and semantics.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api.html" class="btn btn-neutral float-right" title="Monadic API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Austin Warner.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
