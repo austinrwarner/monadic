@@ -43,6 +43,7 @@ jobs:
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.python-version == '3.9'}}
       run: |
         git checkout -b meta/coverage
+        git pull
         coverage-badge -o coverage.svg
         for file in $(ls .); do
           if [[ 
