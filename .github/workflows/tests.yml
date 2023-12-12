@@ -42,6 +42,7 @@ jobs:
     - name: Update coverage badge
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.python-version == '3.9'}}
       run: |
+        git fetch
         git checkout meta/coverage
         git pull
         coverage-badge -o coverage.svg
