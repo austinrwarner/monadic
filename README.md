@@ -18,7 +18,7 @@ pip install monadic
 Alternatively, to install the latest development version, run:
 
 ```bash
-pip install git+https://github.com/austinrwarner/monadic.git@develop
+pip install git+https://github.com/austinrwarner/monadic.git
 ```
 
 ## Introduction
