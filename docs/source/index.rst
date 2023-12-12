@@ -6,10 +6,17 @@
 Monadic
 =======
 
+Monadic is a library for functional programming in Python using Monadic types. Get started with the
+:doc:`installation guide <installation>`, see some examples in the :doc:`introduction <introduction>`,
+or dive right into the :doc:`API documentation <api>`.
+
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+   Installation <installation>
+   Introduction <introduction>
    API <api>
 
 
