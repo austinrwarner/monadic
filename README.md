@@ -1,3 +1,8 @@
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
+[![Lifecycle:Experimental](https://img.shields.io/badge/Lifecycle-Experimental-339999)](https://img.shields.io)
+[![Docs:Latest](https://img.shields.io/badge/Docs-Latest-brightgreen)](https://austinrwarner.github.io/monadic/)
+[![Coverage](tests/coverage.svg)]()
+
 # monadic
 Functional programming in Python using Monadic types.
 
