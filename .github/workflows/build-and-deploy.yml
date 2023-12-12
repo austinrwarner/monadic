@@ -31,4 +31,6 @@ jobs:
     with:
       # release if this is a published release, test-release otherwise
       environment: ${{ github.event.release.published && 'release' || 'test-release' }}
+      release-url: ${{ vars.RELEASE_URL }}
+      release-repository-url: ${{ vars.RELEASE_REPOSITORY_URL }}
     needs: build
