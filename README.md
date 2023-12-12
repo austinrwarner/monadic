@@ -2,6 +2,7 @@
 [![Lifecycle:Experimental](https://img.shields.io/badge/Lifecycle-Experimental-339999)](https://img.shields.io)
 [![Docs:Latest](https://img.shields.io/badge/Docs-Latest-brightgreen)](https://austinrwarner.github.io/monadic/)
 [![Coverage](tests/coverage.svg)]()
+[![Build & Deploy](https://github.com/austinrwarner/monadic/actions/workflows/build-and-deploy.yml/badge.svg?event=release)](https://github.com/austinrwarner/monadic/actions/workflows/build-and-deploy.yml)
 
 # monadic
 Functional programming in Python using Monadic types.
