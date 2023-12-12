@@ -40,10 +40,17 @@ jobs:
       run: |
         pytest
     - name: Update coverage badge
-      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.python-version == '3.9'}}
       run: |
         coverage-badge -o tests/coverage.svg
+    - name: Commit files
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
         git add tests/coverage.svg
         git commit -m "Update coverage badge"
-        git fetch origin main
-        git push origin HEAD:main
+    - name: Push changes
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.python-version == '3.9'}}
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
