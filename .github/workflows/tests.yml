@@ -40,5 +40,10 @@ jobs:
       run: |
         pytest
     - name: Update coverage badge
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.python-version == '3.9'}}
       run: |
         coverage-badge -o tests/coverage.svg
+        git add tests/coverage.svg
+        git commit -m "Update coverage badge"
+        git fetch origin main
+        git push origin HEAD:main
