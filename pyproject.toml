@@ -29,7 +29,6 @@ test = [
 docs = [
     "sphinx",
     "sphinx-rtd-theme",
-    "sphinxcontrib-napoleon",
 ]
 
 
