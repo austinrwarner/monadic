@@ -10,9 +10,7 @@ name: Build & Deploy
 
 on:
   release:
-    types: [published]
-  pull_request:
-    branches: [ "main" ]
+    types: [published, created]
   workflow_dispatch:
 
 
