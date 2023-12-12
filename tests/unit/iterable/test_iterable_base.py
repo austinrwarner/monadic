@@ -1,6 +1,6 @@
 import typing
 
-from monadic.types.iterable import Iterable, U
+from monadic.interfaces.iterable import Iterable, U
 
 
 class GenericIterable(Iterable[U]):

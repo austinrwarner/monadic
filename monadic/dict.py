@@ -1,7 +1,7 @@
 from typing import TypeVar, Union, Tuple, Callable, Hashable
 import typing
 
-from .types.iterable import Iterable
+from .interfaces import Iterable
 from .set import Set
 from .list import List
 from .option import Some, Nothing, Option

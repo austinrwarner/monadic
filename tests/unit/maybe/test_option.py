@@ -1,6 +1,6 @@
 import pytest
 
-from monadic.types.maybe import UnwrapError
+from monadic.interfaces.maybe import UnwrapError
 from monadic.option import Option, Some, Nothing
 
 

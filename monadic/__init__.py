@@ -1,6 +1,4 @@
-from .types.monad import Monad
-from .types.iterable import Iterable
-from .types.maybe import Maybe
+from .interfaces import Monad, Iterable, Maybe
 
 from .option import Option, Some, Nothing
 from .result import Result, Ok, Error

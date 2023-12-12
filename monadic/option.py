@@ -1,7 +1,7 @@
 from typing import Callable, TypeVar
 from abc import ABC, abstractmethod
 
-from .types.maybe import Maybe, UnwrapError
+from .interfaces.maybe import Maybe, UnwrapError
 
 
 T = TypeVar("T")
