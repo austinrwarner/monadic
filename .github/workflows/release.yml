@@ -15,24 +15,15 @@ on:
         description: 'The environment to deploy to'
         required: true
         type: string
-      release-url:
-        description: 'The URL of the release'
-        required: true
-        type: string
-      release-repository-url:
-        description: 'The URL of the release repository'
-        required: true
-        type: string
 
 
 jobs:
   publish:
     name: Upload release to PyPI
-    needs: build
     runs-on: ubuntu-latest
     environment:
       name: ${{ inputs.environment }}
-      url: ${{ inputs.release-url }}
+      url: ${{ vars.RELEASE_URL }}
     permissions:
       id-token: write
     steps:
@@ -44,4 +35,4 @@ jobs:
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          repository-url: ${{ inputs.release-repository-url }}
+          repository-url: ${{ vars.RELEASE_REPOSITORY_URL }}
