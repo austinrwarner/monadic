@@ -36,3 +36,4 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           repository-url: ${{ vars.RELEASE_REPOSITORY_URL }}
+          skip-existing: ${{ vars.RELEASE_SKIP_EXISTING }}
