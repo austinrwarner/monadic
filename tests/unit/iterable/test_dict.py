@@ -24,7 +24,7 @@ def test_apply():
             1: lambda x: (x[0], str(x[1])),
             3: lambda x: (x[0], float(x[1]))
         })
-    ) == Dict({1: '2', 3: 4.0, 5: 6})
+    ) == Dict({1: '2', 3: 4.0})
 
 
 def test_apply_keys():
@@ -33,7 +33,7 @@ def test_apply_keys():
             1: str,
             3: float
         })
-    ) == Dict({'1': 2, 3.0: 4, 5: 6})
+    ) == Dict({'1': 2, 3.0: 4})
 
 
 def test_apply_values():
@@ -42,7 +42,7 @@ def test_apply_values():
             1: str,
             3: float
         })
-    ) == Dict({1: '2', 3: 4.0, 5: 6})
+    ) == Dict({1: '2', 3: 4.0})
 
 
 def test_map():
@@ -100,6 +100,10 @@ def test_filter_values():
     assert Dict({1: 2, 2: -2}).filter_values(lambda x: x > 0) == Dict({1: 2})
 
 
+def test_take():
+    assert Dict({1: 2, 3: 4}).take(1) == Dict({1: 2})
+
+
 def test_fold():
     assert Dict({1: 2, 3: 4}).fold(lambda x, y: (x[0] + y[0], x[1] + y[1])) == (4, 6)
     assert Dict({1: 2, 3: 4}).fold(lambda x, y: (x[0] + y[0], x[1] + y[1]), (10, 10)) == (14, 16)
@@ -113,3 +117,8 @@ def test_get():
 def test_set():
     assert Dict({1: 2, 3: 4}).set(5, 6) == Dict({1: 2, 3: 4, 5: 6})
     assert Dict({1: 2, 3: 4}).set(3, 6) == Dict({1: 2, 3: 6})
+
+
+def test_drop():
+    assert Dict({1: 2, 3: 4}).drop(1) == Dict({3: 4})
+    assert Dict({1: 2, 3: 4}).drop(5) == Dict({1: 2, 3: 4})

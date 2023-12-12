@@ -18,7 +18,7 @@ def test_bind():
 
 
 def test_apply():
-    assert Set({1, 2, 3}).apply(Set({str, float})) == Set({'1', 2.0})
+    assert Set({1, 2, 3}).apply(Set({str, float})) == Set({'1', '2', '3', 1.0, 2.0, 3.0})
 
 
 def test_map():
@@ -51,6 +51,10 @@ def test_neq():
 
 def test_filter():
     assert Set({1, 2, 3}).filter(lambda x: x % 2 == 0) == Set({2})
+
+
+def test_take():
+    assert Set({1, 2, 3}).take(2) == Set({1, 2})
 
 
 def test_fold():

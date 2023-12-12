@@ -18,7 +18,11 @@ def test_bind():
 
 
 def test_apply():
-    assert List([1, 2, 3]).apply(List([str, float])) == List(['1', 2.0])
+    assert List([1, 2, 3]).apply(List([str, float])) == List(['1', 1.0, '2', 2.0, '3', 3.0])
+
+
+def test_zip_apply():
+    assert List([1, 2, 3]).zip_apply(List([str, float])) == List(['1', 2.0])
 
 
 def test_map():
@@ -51,6 +55,10 @@ def test_neq():
 
 def test_filter():
     assert List([1, 2, 3]).filter(lambda x: x % 2 == 0) == List([2])
+
+
+def test_take():
+    assert List([1, 2, 3]).take(2) == List([1, 2])
 
 
 def test_fold():

@@ -56,3 +56,40 @@ Error
 +++++
 .. autoclass:: monadic.Error
     :show-inheritance:
+
+
+Iterables
+---------
+:code:`Iterable` monads are a class of monads that represent a collection
+of values that can be iterated over. :code:`Monadic` exposes three
+:code:`Iterable` monads, :class:`List`, :class:`Set`, and :class:`Dict`.
+These monads each map to their respective Python types, but follow a functional
+style and are immutable.
+
+.. autoclass:: monadic.Iterable
+    :members:
+
+
+List
+~~~~
+.. autoclass:: monadic.List
+    :members: bind, apply, map, zip_apply
+    :show-inheritance:
+
+
+Set
+~~~
+.. autoclass:: monadic.Set
+    :members: bind, apply, map
+    :show-inheritance:
+
+
+Dict
+~~~~
+.. autoclass:: monadic.Dict
+    :members:
+        bind,
+        apply, apply_keys, apply_values,
+        map, map_keys, map_values, filter, filter_keys, filter_values,
+        get, set, drop
+    :show-inheritance:
