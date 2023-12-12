@@ -47,7 +47,7 @@ jobs:
         for file in $(ls -a); do
           if [[ 
             $file != "coverage.svg" &&
-            $file != "coverage.xml" && 
+            $file != "coverage.xml"
         ]]; then
             rm -rf $file
           fi
