@@ -9,25 +9,22 @@
 name: Release
 
 on:
-  push:
-  pull_request:
-    branches: [ "main" ]
+  workflow_call:
+    inputs:
+      environment:
+        description: 'The environment to deploy to'
+        required: true
+        default: 'test-release'
+        type: string
 
 
 jobs:
-  test:
-    uses: ./.github/workflows/tests.yml
-
-  build:
-    uses: ./.github/workflows/build.yml
-    needs: test
-
   publish:
     name: Upload release to PyPI
     needs: build
     runs-on: ubuntu-latest
     environment:
-      name: test-release
+      name: ${{ inputs.environment }}
       url: ${{ vars.RELEASE_URL }}
     permissions:
       id-token: write
