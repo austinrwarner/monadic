@@ -25,7 +25,6 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: ${{ inputs.environment }}
-      url: ${{ vars.RELEASE_URL }}
     permissions:
       id-token: write
     steps:
