@@ -42,20 +42,14 @@ jobs:
     - name: Update coverage badge
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.python-version == '3.9'}}
       run: |
-        git fetch
-        git checkout meta/coverage
-        git pull
         coverage-badge -o coverage.svg
-        for file in $(ls .); do
-          if [[ 
-            $file != "coverage.svg" &&
-            $file != "coverage.xml"
-        ]]; then
-            rm -rf $file
-          fi
-        done
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git add .
-        git commit -m "Update coverage badge"
+        git add -f coverage.svg coverage.xml
+        git commit -m $"Update coverage {date -u}"
+        git fetch origin meta/coverage
+        git checkout meta/coverage
+        git pull
+        git checkout main coverage.svg coverage.xml
+        git commit -m $"Update coverage {date -u}"
         git push origin meta/coverage
