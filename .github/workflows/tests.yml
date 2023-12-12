@@ -44,8 +44,13 @@ jobs:
       run: |
         git checkout -b meta/coverage
         coverage-badge -o coverage.svg
-        for file in $(ls .); do
-          if [[ $file != "coverage.svg" ]]; then
+        for file in $(ls -a .); do
+          if [[ 
+            $file != "coverage.svg" &&
+            $file != "coverage.xml" && 
+            $file != "." && 
+            $file != ".." 
+        ]]; then
             rm -rf $file
           fi
         done
