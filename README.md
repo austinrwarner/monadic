@@ -108,20 +108,20 @@ chain computations together that return a monadic type. For example, consider
 the following code:
 
 ```python
-from typing import Optional
 from monadic import Option, Nothing, Some
 from dataclasses import dataclass
 
 @dataclass
 class User:
     name: str
-    email: Optional[str] = None
+    email: Option[str] = Nothing()
 
 def get_user_email(user: User) -> Option[str]:
-    return Some(user.email) if user.email is not None else Nothing()
+    return user.email
 
 Some(User("John Doe")).bind(get_user_email) # Nothing()
-Some(User("John Doe", "john.doe@xyz.com")).bind(get_user_email) # Some("john.doe@xyz.com")
+Some(User("John Doe", Some("john.doe@xyz.com"))).bind(get_user_email) # Some("john.doe@xyz.com")
+Nothing().bind(get_user_email) # Nothing()
 ```
 
 While every monad supports the `map` and `bind` methods, some monads support 
