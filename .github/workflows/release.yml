@@ -20,9 +20,11 @@ jobs:
 
   build:
     uses: ./.github/workflows/build.yml
+    needs: test
 
   publish:
     name: Upload release to PyPI
+    needs: build
     runs-on: ubuntu-latest
     environment:
       name: test-release
