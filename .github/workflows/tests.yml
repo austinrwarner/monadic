@@ -40,18 +40,23 @@ jobs:
       run: |
         pytest
     - name: Update coverage badge
-      run: |
-        coverage-badge -o tests/coverage.svg
+      run: | # Remove everything except the coverage badge
+        coverage-badge -o coverage.svg
+        for file in $(ls .); do
+          if [[ $file != "coverage.svg" ]]; then
+            rm -rf $file
+          fi
+        done
     - name: Commit files
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git add tests/coverage.svg
+        git add .
         git commit -m "Update coverage badge"
     - name: Push changes
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.python-version == '3.9'}}
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: ${{ github.ref }}
+        branch: meta/coverage
         force_with_lease: true
